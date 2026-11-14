@@ -3181,11 +3181,11 @@ svg text {
 
 .footbar {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  padding: 16px var(--pad) 28px;
+  gap: 0;
+  padding: 8px var(--pad) 10px;
+  text-align: center;
   border-top: 1px solid var(--line);
   font-size: 13.5px;
   color: var(--ink-6);
@@ -3194,8 +3194,7 @@ svg text {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 6px 12px 6px 7px;
-  margin-left: -7px;
+  padding: 4px 10px 4px 7px;
   color: var(--ink-4);
   border-radius: var(--rc);
   transition: background-color 0.2s, color 0.2s;
