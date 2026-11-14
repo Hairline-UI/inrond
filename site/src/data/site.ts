@@ -3,6 +3,8 @@
 export const REPO = "https://github.com/Hairline-UI/inrond";
 export const DOWNLOAD = `${REPO}/releases/latest`;
 export const INTER = "https://rsms.me/inter/";
+export const HAIRLINE = "https://hairlineui.com";
+export const REPO_API = "https://api.github.com/repos/Hairline-UI/inrond";
 export const VERSION = "1.0";
 export const CDN = "https://cdn.jsdelivr.net/gh/Hairline-UI/inrond@v1.0/fonts/webfonts";
 

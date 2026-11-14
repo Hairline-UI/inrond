@@ -2,10 +2,11 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import { G, WORD, areaAt, build, data, f, numsAt } from "@/lib/glyph";
-import { DOWNLOAD, REPO, INTER, VERSION } from "@/data/site";
+import { DOWNLOAD, INTER, VERSION } from "@/data/site";
 import { DEFAULT_ROND, playDial, useDial } from "@/lib/dial";
 import { Dial, DialValue, Presets } from "@/components/Dial";
 import { Arrow, Plate } from "@/components/Kit";
+import { StarButton } from "@/components/Stars";
 
 const ADV = WORD.map((c) => G[c].adv);
 const X0 = [0, ADV[0]];
@@ -99,7 +100,7 @@ function GlyphDrawing() {
   );
 }
 
-export function Hero() {
+export function Hero({ stars }: { stars: number | null }) {
   const ink = useRef<HTMLSpanElement>(null);
   const inkBar = useRef<HTMLSpanElement>(null);
 
@@ -137,9 +138,7 @@ export function Hero() {
                 <Arrow dir="down" />
               </span>
             </a>
-            <a className="btn btn--soft" href={REPO}>
-              Source on GitHub
-            </a>
+            <StarButton initial={stars} />
           </div>
           <p className="fine">
             Built on <a href={INTER}>Inter 4.1</a> by Rasmus Andersson. Not affiliated with the Inter project.

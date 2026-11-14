@@ -24,7 +24,7 @@ Rounded takes on Inter already exist (Open Runde, Intern), but each is a separat
 <!-- frozen builds: inrond-round.css (ROND 100, family "Inrond Round"), inrond-soft.css (ROND 50, family "Inrond Soft") -->
 ```
 
-The stylesheet uses unicode-range subsets, so a Latin page downloads only the Latin file. An npm package is prepared in `package.json` but not published yet.
+The stylesheet uses unicode-range subsets, so a Latin page downloads only the Latin file.
 
 ### Self-hosted
 

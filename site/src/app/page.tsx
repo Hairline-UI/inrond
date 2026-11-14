@@ -11,9 +11,22 @@ import { Use } from "@/components/Use";
 import { Tester } from "@/components/Tester";
 import { Faq } from "@/components/Faq";
 import { Closing } from "@/components/Closing";
-import { TICKER } from "@/data/site";
+import { REPO_API, TICKER } from "@/data/site";
 
-export default function Home() {
+// The star count at build time; the button refreshes it in the browser.
+async function getStars(): Promise<number | null> {
+  try {
+    const r = await fetch(REPO_API, { headers: { Accept: "application/vnd.github+json" }, cache: "force-cache" });
+    if (!r.ok) return null;
+    const j = await r.json();
+    return typeof j.stargazers_count === "number" ? j.stargazers_count : null;
+  } catch {
+    return null;
+  }
+}
+
+export default async function Home() {
+  const stars = await getStars();
   return (
     <div className="page">
       <a className="skip" href="#main">
@@ -21,7 +34,7 @@ export default function Home() {
       </a>
       <Header />
       <main id="main">
-        <Hero />
+        <Hero stars={stars} />
         <div className="sec ticker" aria-label="What is in the font">
           <ul className="wrap ticker__row">
             {TICKER.map(([v, k]) => (

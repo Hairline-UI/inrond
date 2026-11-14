@@ -23,10 +23,6 @@ const QA: [string, string][] = [
     "Is it hinted?",
     "No, like Inter’s variable fonts. It renders well on modern screens; very small text on old Windows displays may look softer than a hinted static font.",
   ],
-  [
-    "Does the generator work on other fonts?",
-    "It is written for any TrueType variable font, but it has only been run on Inter. Until it has been proven on a second typeface, treat that as untested.",
-  ],
 ];
 
 export function Faq() {

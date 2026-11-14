@@ -101,9 +101,9 @@ export function Size() {
           </Plate>
           <div className="bars__aside">
             <p>
-              <strong>Honest comparison.</strong> Google Sans Flex cut to weight and roundness is <span className="mono">70 KB</span>{" "}
-              of Latin; Inrond with the same two axes would be <span className="mono">144 KB</span> (not shipped). Inrond is not the
-              efficient choice; it is the Inter-compatible one.
+              <strong>Honest comparison.</strong> Google Sans Flex cut to the same three axes (weight, optical size and roundness)
+              is <span className="mono">202 KB</span> of Latin; Inrond is <span className="mono">236 KB</span>. Inrond is not the
+              smaller choice; it is the Inter-compatible one.
             </p>
           </div>
         </div>
