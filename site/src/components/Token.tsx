@@ -115,7 +115,7 @@ export function Token() {
             One number for your corners <span className="mute">and your letters.</span>
           </>
         }
-        text="Most rounded interfaces still set their text in a sharp face. Bind the axis to the variable that already sets your border radius and buttons, fields and type change together. This page works that way: its corners and its letters read one variable."
+        text="Drive the axis from the same token that sets your border-radius. Buttons, fields and type then round together, and changing one number restyles all of them. This page works that way."
       />
       <div className="wrap token">
         <div className="token__controls">

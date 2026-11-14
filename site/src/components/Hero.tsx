@@ -128,8 +128,8 @@ export function Hero({ stars }: { stars: number | null }) {
             Inter, with a <span className="mute">roundness axis.</span>
           </h1>
           <p className="lede">
-            One font runs from Inter&rsquo;s sharp corners to a round pen, at every weight and in a drawn italic. Not one letter
-            changes width, so nothing on your page reflows.
+            Pick how round your letters are, from 0 (Inter, unchanged) to 100. Tie it to your border-radius token and your type
+            matches your interface. Every letter keeps Inter&rsquo;s width, so swapping it in moves nothing on the page.
           </p>
           <div className="hero__cta">
             <a className="btn btn--solid" href={DOWNLOAD}>

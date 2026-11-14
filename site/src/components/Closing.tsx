@@ -81,13 +81,12 @@ export function Closing() {
       </footer>
       <div className="wrap footbar">
         <a className="maker" href={HAIRLINE} aria-label="Inrond is made by Hairline UI, visit hairlineui.com">
+          <span>Inrond is made by</span>
           <svg className="maker__mark" viewBox="0 0 64 64" width="22" height="22" aria-hidden>
             <path className="maker__bg" d="M32 1.5c13.6 0 21.4 0 25.9 4.6 4.6 4.5 4.6 12.3 4.6 25.9s0 21.4-4.6 25.9c-4.5 4.6-12.3 4.6-25.9 4.6s-21.4 0-25.9-4.6C1.5 53.4 1.5 45.6 1.5 32S1.5 10.6 6.1 6.1C10.6 1.5 18.4 1.5 32 1.5Z" />
             <path className="maker__tile" d="M16.5 7.5H21.2Q22.4 7.5 22.4 8.7V55.3Q22.4 56.5 21.2 56.5H16.5Q7.5 56.5 7.5 47.5V16.5Q7.5 7.5 16.5 7.5ZM42.8 7.5H47.5Q56.5 7.5 56.5 16.5V47.5Q56.5 56.5 47.5 56.5H42.8Q41.6 56.5 41.6 55.3V8.7Q41.6 7.5 42.8 7.5ZM26.2 7.5H37.8Q39 7.5 39 8.7V29.5Q39 30.7 37.8 30.7H26.2Q25 30.7 25 29.5V8.7Q25 7.5 26.2 7.5ZM26.2 33.3H37.8Q39 33.3 39 34.5V55.3Q39 56.5 37.8 56.5H26.2Q25 56.5 25 55.3V34.5Q25 33.3 26.2 33.3Z" />
           </svg>
-          <span>
-            Inrond is made by <strong>Hairline UI</strong>
-          </span>
+          <strong>Hairline UI</strong>
           <Arrow dir="up-right" />
         </a>
         <span className="footbar__c">© 2026 Hairline UI</span>
