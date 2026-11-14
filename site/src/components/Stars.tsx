@@ -40,7 +40,7 @@ export function StarButton({ initial }: { initial: number | null }) {
 
   const label = stars === null ? "Star Inrond on GitHub" : `Star Inrond on GitHub, ${stars} stars`;
   return (
-    <a className="btn btn--soft gh" href={REPO} aria-label={label}>
+    <a className="btn btn--soft gh" href={REPO} aria-label={label} data-oa-event="github_star" data-oa-prop-location="hero">
       <svg viewBox="0 0 16 16" width="17" height="17" aria-hidden className="gh__mark">
         <path
           fill="currentColor"

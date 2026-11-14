@@ -132,7 +132,7 @@ export function Hero({ stars }: { stars: number | null }) {
             matches your interface. Every letter keeps Inter&rsquo;s width, so swapping it in moves nothing on the page.
           </p>
           <div className="hero__cta">
-            <a className="btn btn--solid" href={DOWNLOAD}>
+            <a className="btn btn--solid" href={DOWNLOAD} data-oa-event="download" data-oa-prop-location="hero">
               Download {VERSION}
               <span className="btn__dot">
                 <Arrow dir="down" />

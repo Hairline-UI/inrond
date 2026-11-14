@@ -22,20 +22,20 @@ export function Closing() {
         </h2>
         <div className="end__cta">
           <div className="end__btns">
-            <a className="btn btn--solid" href={DOWNLOAD}>
+            <a className="btn btn--solid" href={DOWNLOAD} data-oa-event="download" data-oa-prop-location="closing">
               Download {VERSION}
               <span className="btn__dot">
                 <Arrow dir="down" />
               </span>
             </a>
-            <a className="btn btn--soft" href={REPO}>
+            <a className="btn btn--soft" href={REPO} data-oa-event="github" data-oa-prop-location="closing">
               GitHub
             </a>
           </div>
           <div className="cdn">
             <span className="cdn__k mono">$</span>
             <code className="mono">cdn.jsdelivr.net/gh/Hairline-UI/inrond@v1.0</code>
-            <CopyButton text={`<link rel="stylesheet" href="${CDN}/inrond.css">`} label="Copy the stylesheet link tag" />
+            <CopyButton text={`<link rel="stylesheet" href="${CDN}/inrond.css">`} label="Copy the stylesheet link tag" track="cdn-link" />
           </div>
         </div>
       </div>
@@ -73,14 +73,24 @@ export function Closing() {
         </div>
         <nav className="colophon__cell colophon__links" aria-label="Links">
           <p className="side__k">Links</p>
-          <a href={REPO}>Repository</a>
-          <a href={DOWNLOAD}>Releases</a>
+          <a href={REPO} data-oa-event="github" data-oa-prop-location="footer">
+            Repository
+          </a>
+          <a href={DOWNLOAD} data-oa-event="download" data-oa-prop-location="footer">
+            Releases
+          </a>
           <a href={`${REPO}/issues`}>Issues</a>
           <a href={`${REPO}/tree/main/qa`}>Test reports</a>
         </nav>
       </footer>
       <div className="wrap footbar">
-        <a className="maker" href={HAIRLINE} aria-label="Inrond is made by Hairline UI, visit hairlineui.com">
+        <a
+          className="maker"
+          href={HAIRLINE}
+          aria-label="Inrond is made by Hairline UI, visit hairlineui.com"
+          data-oa-event="hairline_ui"
+          data-oa-prop-location="footer"
+        >
           <span>Inrond is made by</span>
           <svg className="maker__mark" viewBox="0 0 64 64" width="22" height="22" aria-hidden>
             <path className="maker__bg" d="M32 1.5c13.6 0 21.4 0 25.9 4.6 4.6 4.5 4.6 12.3 4.6 25.9s0 21.4-4.6 25.9c-4.5 4.6-12.3 4.6-25.9 4.6s-21.4 0-25.9-4.6C1.5 53.4 1.5 45.6 1.5 32S1.5 10.6 6.1 6.1C10.6 1.5 18.4 1.5 32 1.5Z" />

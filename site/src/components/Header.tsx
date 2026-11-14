@@ -92,7 +92,7 @@ export function Header() {
               </span>
             </div>
             <ThemeToggle />
-            <a className="btn btn--solid btn--sm top__dl" href={DOWNLOAD}>
+            <a className="btn btn--solid btn--sm top__dl" href={DOWNLOAD} data-oa-event="download" data-oa-prop-location="header">
               Download
             </a>
             <button
@@ -133,13 +133,13 @@ export function Header() {
             <Dial id="dial-menu" compact label="Roundness for the whole page" />
           </div>
           <div className="menu__foot">
-            <a className="btn btn--solid" href={DOWNLOAD}>
+            <a className="btn btn--solid" href={DOWNLOAD} data-oa-event="download" data-oa-prop-location="menu">
               Download {VERSION}
               <span className="btn__dot">
                 <Arrow dir="down" />
               </span>
             </a>
-            <a className="btn btn--soft" href={REPO}>
+            <a className="btn btn--soft" href={REPO} data-oa-event="github" data-oa-prop-location="menu">
               GitHub
             </a>
             <ThemeToggle />

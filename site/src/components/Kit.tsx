@@ -40,7 +40,8 @@ export function CopyIcon({ done }: { done: boolean }) {
   );
 }
 
-export function CopyButton({ text, label }: { text: string; label: string }) {
+/** `track` names what is copied; it is sent to Open Analytics as the `copy_code` event's `file` property. */
+export function CopyButton({ text, label, track }: { text: string; label: string; track: string }) {
   const [done, setDone] = useState(false);
   const t = useRef(0);
   useEffect(() => () => clearTimeout(t.current), []);
@@ -49,6 +50,8 @@ export function CopyButton({ text, label }: { text: string; label: string }) {
       type="button"
       className="iconbtn"
       aria-label={done ? "Copied" : label}
+      data-oa-event="copy_code"
+      data-oa-prop-file={track}
       onClick={async () => {
         try {
           await navigator.clipboard.writeText(text);
@@ -148,7 +151,7 @@ export function CodePanel({
         )}
         <span className="code__end">
           <span className="code__count">{lines.length} lines</span>
-          <CopyButton text={f.code} label={`Copy ${f.name}`} />
+          <CopyButton text={f.code} label={`Copy ${f.name}`} track={f.name} />
         </span>
       </figcaption>
       <div className="sheet code__sheet">

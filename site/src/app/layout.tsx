@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 
@@ -32,7 +33,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preload" href="/fonts/Inrond.latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="stylesheet" href="/fonts/inrond.css" />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        {/* Open Analytics. Custom events are data-oa-event / data-oa-prop-* attributes on the buttons themselves. */}
+        <Script
+          async
+          src="https://c.ecompin.com/oa.js"
+          data-key="oa_pk_MvTmTzAdQvTJMU4wdpbf0HN4myRQtBLg"
+          data-collector="https://c.ecompin.com"
+          strategy="afterInteractive"
+        />
+      </body>
     </html>
   );
 }

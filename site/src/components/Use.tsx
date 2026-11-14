@@ -72,11 +72,11 @@ export function Use() {
                 <code className="mono">python scripts/pin.py 60</code>
               </span>
             </div>
-            <a className="extra extra--link" href={DOWNLOAD}>
+            <a className="extra extra--link" href={DOWNLOAD} data-oa-event="download" data-oa-prop-location="use_desktop">
               <span className="extra__k">Desktop apps</span>
               <span className="extra__v">Variable and static TTFs in the release</span>
             </a>
-            <a className="extra extra--link" href={REPO}>
+            <a className="extra extra--link" href={REPO} data-oa-event="github" data-oa-prop-location="use_source">
               <span className="extra__k">Source</span>
               <span className="extra__v">The generator and tests on GitHub</span>
             </a>
