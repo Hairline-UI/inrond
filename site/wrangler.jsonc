@@ -1,0 +1,12 @@
+// Cloudflare Workers, static assets only: the landing page is a static export (next build -> out/).
+// Build: npm run build    Deploy: npx wrangler deploy    Domain: inrond.hairlineui.com (set in the dashboard)
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "inrond",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./out",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  }
+}

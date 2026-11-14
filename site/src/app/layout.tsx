@@ -7,7 +7,7 @@ const description =
   "A free variable font that runs from Inter to fully round at every weight, in roman and a drawn italic, without changing a single letter width. 2,937 glyphs, Cyrillic and Greek, SIL Open Font License.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://inrond.vercel.app"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://inrond.hairlineui.com"),
   title: { absolute: title },
   description,
   openGraph: { type: "website", siteName: "Inrond", title, description, url: "/" },
