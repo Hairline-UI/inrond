@@ -1,0 +1,13 @@
+C:\Users\harva\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fontbakery\fonts_profile.py:103: UserWarning: Failed to load fontbakery.checks.vendorspecific.googlefonts.glyphsets.shape_languages: No module named 'glyphsets'
+  warnings.warn("Failed to load %s: %s" % (import_path, e))
+Start ... running 127 individual check executions.
+Goeist[wght].ttf: alt_caron: WARN [decomposed-outline, None]
+Goeist[wght].ttf: interpolation_issues: WARN [interpolation-issues]
+Goeist[wght].ttf: ligature_carets: WARN [incomplete-caret-pos-data]
+Goeist[wght].ttf: mandatory_avar_table: WARN [missing-avar]
+Goeist[wght].ttf: math_signs_width: WARN [width-outliers]
+Goeist[wght].ttf: unreachable_glyphs: WARN [unreachable-glyphs]
+Goeist[wght].ttf: valid_glyphnames: WARN [legacy-long-names]
+
+ ERROR: 0 FATAL: 0 FAIL: 0 WARN: 7 INFO: 3 SKIP: 18 PASS: 99
+A report in markdown format has been saved to "qa/fontbakery-goeist.md"

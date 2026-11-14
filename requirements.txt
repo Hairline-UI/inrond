@@ -1,0 +1,7 @@
+fonttools[woff,unicode,ufo,lxml]>=4.60
+brotli
+uharfbuzz
+freetype-py
+numpy
+pillow
+fontbakery

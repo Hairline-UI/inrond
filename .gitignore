@@ -1,0 +1,17 @@
+build/
+refs/
+proofs/
+__pycache__/
+*.pyc
+.claude/
+fonts/custom/
+notes/
+CLAUDE.md
+node_modules/
+site/.next/
+site/out/
+site/public/fonts/
+site/next-env.d.ts
+*.tsbuildinfo
+.hairline/
+site/DESIGN.md

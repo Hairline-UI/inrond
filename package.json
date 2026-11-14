@@ -1,0 +1,36 @@
+{
+  "name": "inrond",
+  "version": "1.0.0",
+  "description": "Inter, with a roundness axis. A variable font from Inter to fully round (ROND 0 to 100), with weight, optical size and a drawn italic.",
+  "license": "OFL-1.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hairline-UI/inrond.git"
+  },
+  "homepage": "https://github.com/Hairline-UI/inrond#readme",
+  "bugs": "https://github.com/Hairline-UI/inrond/issues",
+  "keywords": [
+    "font",
+    "variable-font",
+    "typeface",
+    "inter",
+    "rounded",
+    "roundness",
+    "woff2",
+    "webfont"
+  ],
+  "style": "fonts/webfonts/inrond.css",
+  "exports": {
+    ".": "./fonts/webfonts/inrond.css",
+    "./inrond.css": "./fonts/webfonts/inrond.css",
+    "./inrond-round.css": "./fonts/webfonts/inrond-round.css",
+    "./inrond-soft.css": "./fonts/webfonts/inrond-soft.css",
+    "./fonts/*": "./fonts/webfonts/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "fonts/webfonts/",
+    "OFL.txt",
+    "README.md"
+  ]
+}

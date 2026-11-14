@@ -1,0 +1,18 @@
+C:\Users\harva\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fontbakery\fonts_profile.py:103: UserWarning: Failed to load fontbakery.checks.vendorspecific.googlefonts.glyphsets.shape_languages: No module named 'glyphsets'
+  warnings.warn("Failed to load %s: %s" % (import_path, e))
+Start ... running 127 individual check executions.
+InterVariable-Italic.ttf: opentype/gdef_mark_chars: WARN [mark-chars]
+InterVariable-Italic.ttf: opentype/gdef_spacing_marks: WARN [spacing-mark-glyphs]
+All fonts: opentype/STAT/ital_axis: FAIL [missing-roman]
+InterVariable-Italic.ttf: base_has_width: FAIL [zero-width-bases]
+InterVariable-Italic.ttf: case_mapping: FAIL [missing-case-counterparts]
+InterVariable-Italic.ttf: family/win_ascent_and_descent: FAIL [descent, ascent]
+InterVariable-Italic.ttf: interpolation_issues: WARN [interpolation-issues]
+InterVariable-Italic.ttf: name/family_and_style_max_length: FAIL [familyname-plus-stat-entries-too-long]
+InterVariable-Italic.ttf: no_mac_entries: FAIL [mac-names]
+InterVariable-Italic.ttf: overlapping_path_segments: WARN [overlapping-path-segments]
+InterVariable-Italic.ttf: smart_dropout: FAIL [lacks-smart-dropout]
+InterVariable-Italic.ttf: unreachable_glyphs: WARN [unreachable-glyphs]
+
+ ERROR: 0 FATAL: 0 FAIL: 7 WARN: 5 INFO: 3 SKIP: 17 PASS: 95
+A report in markdown format has been saved to "qa/fontbakery-inter-italic-baseline.md"

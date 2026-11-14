@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inrond: a typeface with a roundness axis</title>
+<meta name="description" content="Inrond is an open-source variable typeface with a Roundness axis: every weight, roman and italic, from sharp to fully round.">
+<style>
+@font-face {
+  font-family: "Inrond";
+  src: url("../fonts/webfonts/Inrond%5BROND,opsz,wght%5D.woff2") format("woff2");
+  font-weight: 100 900; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Inrond";
+  src: url("../fonts/webfonts/Inrond-Italic%5BROND,opsz,wght%5D.woff2") format("woff2");
+  font-weight: 100 900; font-style: italic; font-display: swap;
+}
+@property --rond { syntax: "<number>"; inherits: true; initial-value: 0; }
+:root {
+  --bg: #fbfbfa; --fg: #111110; --muted: #6f6e69; --line: #e4e3df; --card: #ffffff;
+  --accent: #ff4d2e; --accent-fg: #ffffff; --soft: #f1f0ec;
+  --rond: 100; --wght: 640; --ui: 60;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #0e0e0d; --fg: #f4f3ef; --muted: #98968f; --line: #2a2a27; --card: #171716; --soft: #1e1e1c; }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font-family: "Inrond", system-ui, sans-serif; font-size: 17px; line-height: 1.5;
+  font-variation-settings: "ROND" 40; font-feature-settings: "calt", "ss03";
+  -webkit-font-smoothing: antialiased;
+}
+main { max-width: 1120px; margin: 0 auto; padding: 0 28px 120px; }
+header { display: flex; justify-content: space-between; align-items: center; padding: 26px 0; font-size: 15px; }
+header b { font-weight: 700; font-variation-settings: "ROND" 100; font-size: 19px; letter-spacing: -0.01em; }
+header nav a { color: var(--muted); text-decoration: none; margin-left: 22px; }
+header nav a:hover { color: var(--fg); }
+.eyebrow { color: var(--muted); font-size: 14px; letter-spacing: 0.02em; }
+h2 { font-size: clamp(30px, 4.4vw, 46px); line-height: 1.06; letter-spacing: -0.028em; font-weight: 680; margin: 0 0 14px; font-variation-settings: "ROND" 100; }
+p.lede { color: var(--muted); max-width: 60ch; margin: 0 0 30px; font-size: 18px; }
+section { padding-top: 110px; }
+
+/* hero */
+.hero { padding-top: 34px; }
+.word {
+  font-size: clamp(88px, 21vw, 290px); line-height: 0.9; letter-spacing: -0.045em; margin: 0 0 0 -0.04em;
+  font-weight: var(--wght); font-variation-settings: "ROND" var(--rond); user-select: none;
+}
+.word i { font-style: normal; color: var(--accent); }
+.word.it { font-style: italic; }
+.tag { font-size: clamp(22px, 3vw, 34px); line-height: 1.18; letter-spacing: -0.02em; font-weight: 560; max-width: 21ch; margin: 30px 0 34px; font-variation-settings: "ROND" var(--rond); }
+.controls { display: grid; grid-template-columns: 1fr 1fr auto; gap: 26px; align-items: end; border-top: 1px solid var(--line); padding-top: 22px; }
+label { display: block; font-size: 13px; color: var(--muted); }
+label output { float: right; color: var(--fg); font-feature-settings: "tnum"; }
+input[type=range] { width: 100%; accent-color: var(--accent); margin: 10px 0 0; height: 22px; }
+.toggle { display: flex; gap: 8px; }
+button, .btn {
+  font: inherit; font-size: 14px; font-weight: 560; color: var(--fg); background: var(--soft); border: 1px solid var(--line);
+  padding: 9px 15px; border-radius: 999px; cursor: pointer;
+}
+button[aria-pressed=true] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+@media (max-width: 720px) { .controls { grid-template-columns: 1fr; } }
+
+/* ramp */
+.ramp { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; background: var(--card); }
+.ramp div { padding: 26px 0 20px; text-align: center; border-left: 1px solid var(--line); }
+.ramp div:first-child { border-left: 0; }
+.ramp span { display: block; font-size: clamp(54px, 9vw, 112px); line-height: 1; font-weight: 700; letter-spacing: -0.03em; }
+.ramp small { color: var(--muted); font-size: 12px; font-feature-settings: "tnum"; }
+@media (max-width: 720px) { .ramp { grid-template-columns: repeat(3, 1fr); } .ramp div:nth-child(4) { border-left: 0; } }
+
+/* ui demo */
+.split { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 28px; align-items: stretch; }
+@media (max-width: 860px) { .split { grid-template-columns: 1fr; } }
+.ui {
+  --radius: calc(var(--ui) * 0.22px);
+  font-variation-settings: "ROND" var(--ui);
+  background: var(--card); border: 1px solid var(--line); border-radius: calc(var(--radius) * 1.5 + 4px); padding: 26px;
+}
+.ui h3 { margin: 0 0 4px; font-size: 22px; letter-spacing: -0.015em; font-weight: 680; }
+.ui p { margin: 0 0 18px; color: var(--muted); font-size: 15px; }
+.ui .field { border: 1px solid var(--line); border-radius: var(--radius); padding: 11px 14px; font-size: 15px; background: var(--bg); margin-bottom: 10px; display: flex; justify-content: space-between; }
+.ui .field em { color: var(--muted); font-style: normal; }
+.ui .row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; align-items: center; }
+.ui .cta { background: var(--accent); color: var(--accent-fg); border: 0; border-radius: var(--radius); padding: 12px 20px; font-size: 15px; font-weight: 640; }
+.ui .ghost { background: transparent; border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 18px; font-size: 15px; }
+.ui .chip { background: var(--soft); border-radius: var(--radius); padding: 5px 11px; font-size: 13px; font-weight: 560; }
+.ui .stat { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 18px; }
+.ui .stat div { background: var(--soft); border-radius: var(--radius); padding: 14px; }
+.ui .stat b { display: block; font-size: 26px; letter-spacing: -0.02em; font-weight: 700; font-feature-settings: "tnum"; }
+.ui .stat span { font-size: 12px; color: var(--muted); }
+pre {
+  margin: 0; background: #131312; color: #e9e7e1; border-radius: 16px; padding: 22px 24px; font: 14px/1.6 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  overflow: auto; white-space: pre; border: 1px solid #2a2a27;
+}
+pre .c { color: #8b897f; } pre .k { color: #ff8a70; } pre .n { color: #ffd479; }
+.side { display: flex; flex-direction: column; gap: 16px; }
+.side .panel { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; }
+
+/* hover */
+.hover { display: flex; flex-wrap: wrap; gap: 14px; }
+.hover a {
+  font-size: clamp(26px, 4vw, 44px); font-weight: 650; letter-spacing: -0.025em; text-decoration: none; color: var(--fg);
+  padding: 16px 30px; border: 1.5px solid var(--fg); border-radius: 0;
+  font-variation-settings: "ROND" 0; transition: font-variation-settings .28s ease, border-radius .28s ease, background .28s, color .28s;
+}
+.hover a:hover, .hover a:focus-visible { font-variation-settings: "ROND" 100; border-radius: 40px; background: var(--fg); color: var(--bg); outline: 0; }
+
+/* table */
+.scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 18px; background: var(--card); }
+table { border-collapse: collapse; width: 100%; min-width: 860px; font-size: 14.5px; font-feature-settings: "tnum"; }
+th, td { text-align: left; padding: 13px 16px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+thead th { font-size: 12.5px; color: var(--muted); font-weight: 560; }
+tbody th { font-weight: 560; color: var(--muted); }
+td.us, th.us { background: color-mix(in srgb, var(--accent) 9%, transparent); color: var(--fg); font-weight: 640; }
+.note { color: var(--muted); font-size: 13.5px; margin-top: 12px; max-width: 80ch; }
+
+/* tester */
+.tester { border: 1px solid var(--line); border-radius: 18px; background: var(--card); padding: 22px 26px 26px; }
+.tester [contenteditable] { outline: 0; font-size: var(--size, 64px); line-height: 1.12; letter-spacing: -0.02em; font-weight: var(--tw, 500); font-variation-settings: "ROND" var(--tr, 70); min-height: 1.2em; }
+.tester .bar { display: grid; grid-template-columns: repeat(3, 1fr) auto; gap: 22px; margin-bottom: 20px; align-items: end; }
+@media (max-width: 720px) { .tester .bar { grid-template-columns: 1fr; } }
+.langs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 16px; }
+@media (max-width: 720px) { .langs { grid-template-columns: 1fr; } }
+.langs div { border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; background: var(--card); font-variation-settings: "ROND" 100; }
+.langs small { display: block; color: var(--muted); font-size: 12.5px; margin-bottom: 6px; font-variation-settings: "ROND" 40; }
+.langs p { margin: 0; font-size: 24px; line-height: 1.25; letter-spacing: -0.012em; font-weight: 520; }
+.glyphs { font-size: 30px; line-height: 1.5; letter-spacing: 0.06em; font-weight: 520; font-variation-settings: "ROND" var(--rond); word-break: break-all; margin: 0; }
+footer { margin-top: 110px; padding-top: 26px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+footer a { color: var(--fg); }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <b>Inrond</b>
+    <nav><a href="#match">Match your UI</a><a href="#numbers">Numbers</a><a href="#try">Try it</a><a href="#use">Use</a></nav>
+  </header>
+
+  <section class="hero" style="padding-top:20px">
+    <div class="eyebrow">Open source · SIL OFL 1.1 · Variable · Roman and Italic</div>
+    <h1 class="word" id="word">Inrond<i>.</i></h1>
+    <p class="tag">One typeface. Every corner radius, from sharp to fully round.</p>
+    <div class="controls">
+      <label>Roundness <output id="oR">100</output>
+        <input type="range" id="sR" min="0" max="100" value="100" aria-label="Roundness"></label>
+      <label>Weight <output id="oW">640</output>
+        <input type="range" id="sW" min="100" max="900" value="640" aria-label="Weight"></label>
+      <div class="toggle">
+        <button id="bI" aria-pressed="false">Italic</button>
+        <button id="bP" aria-pressed="true">Animate</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Roundness is an axis, not a second font.</h2>
+    <p class="lede">Rounded variants are usually separate families frozen at one setting. Inrond stores the sharp and the round design in one file and lets you pick any point between them, at any weight and optical size.</p>
+    <div class="ramp" id="ramp"></div>
+  </section>
+
+  <section id="match">
+    <h2>Type that follows your radius token.</h2>
+    <p class="lede">Your buttons, inputs and cards already share one radius. Now the letters can share it too. Drag the slider: one number drives the components and the type.</p>
+    <div class="split">
+      <div class="ui" id="ui">
+        <h3>Create workspace</h3>
+        <p>Invite your team and start shipping.</p>
+        <div class="field"><span>Acme Design</span><em>Name</em></div>
+        <div class="field"><span>acme.app/design</span><em>URL</em></div>
+        <div class="row"><span class="chip">Pro</span><span class="chip">12 seats</span><span class="chip">EU region</span></div>
+        <div class="stat">
+          <div><b>98.2%</b><span>Uptime</span></div>
+          <div><b>1,284</b><span>Deploys</span></div>
+          <div><b>36ms</b><span>p95</span></div>
+        </div>
+        <div class="row"><button class="cta">Create workspace</button><button class="ghost">Cancel</button></div>
+      </div>
+      <div class="side">
+        <div class="panel">
+          <label>Radius token <output id="oU">60</output>
+            <input type="range" id="sU" min="0" max="100" value="60" aria-label="Radius token"></label>
+        </div>
+<pre id="code"></pre>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>It animates.</h2>
+    <p class="lede">Roundness interpolates like weight does, so it can be a hover state, a theme switch or a scroll effect. Text never reflows: advance widths and kerning are identical at every roundness.</p>
+    <div class="hover"><a href="#try">Hover me</a><a href="#try">Get started</a><a href="#try">Sharp → Round</a></div>
+  </section>
+
+  <section id="numbers">
+    <h2>Measured, not claimed.</h2>
+    <p class="lede">Every number below was read from the released font files with fontTools on 14 November 2026.</p>
+    <div class="scroll">
+    <table>
+      <thead><tr><th></th><th class="us">Inrond 1.0</th><th>Inter 4.1</th><th>Intern 1.0</th><th>Goeist 0.0.2</th><th>Open Runde 1.0.1</th><th>Google Sans Flex</th></tr></thead>
+      <tbody>
+        <tr><th>Roundness</th><td class="us">Axis, 0–100</td><td>None</td><td>Fixed</td><td>Fixed</td><td>Fixed</td><td>Axis, 0–100</td></tr>
+        <tr><th>Glyphs</th><td class="us">2,937</td><td>2,937</td><td>1,087</td><td>975</td><td>2,549</td><td>686</td></tr>
+        <tr><th>Unicode characters</th><td class="us">2,852</td><td>2,852</td><td>541</td><td>728</td><td>2,512</td><td>541</td></tr>
+        <tr><th>Cyrillic / Greek</th><td class="us">249 / 105</td><td>249 / 105</td><td>0 / 0</td><td>134 / 5</td><td>256 / 121</td><td>0 / 1</td></tr>
+        <tr><th>Italic</th><td class="us">Yes, drawn</td><td>Yes, drawn</td><td>No</td><td>Yes</td><td>No</td><td>Slant axis</td></tr>
+        <tr><th>Weight</th><td class="us">100–900 axis</td><td>100–900 axis</td><td>100–900 axis</td><td>100–900 axis</td><td>4 static</td><td>1–1000 axis</td></tr>
+        <tr><th>Optical size</th><td class="us">14–32 axis</td><td>14–32 axis</td><td>14–32 axis</td><td>No</td><td>No</td><td>1–144 axis</td></tr>
+        <tr><th>OpenType features</th><td class="us">39</td><td>39</td><td>33</td><td>26</td><td>6</td><td>20</td></tr>
+        <tr><th>Full roman, woff2</th><td class="us">843 KB</td><td>344 KB</td><td>170 KB</td><td>87 KB</td><td>151 KB per weight</td><td>1,418 KB</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note">Inrond is built on Inter 4.1 by Rasmus Andersson and keeps its full character set, features, metrics and kerning. The cost of the axis is file size: about 2.5× Inter for the full font. Unicode-range subsets are provided; the Latin slice is 236 KB.</p>
+  </section>
+
+  <section id="try">
+    <h2>Try it.</h2>
+    <div class="tester" id="tester">
+      <div class="bar">
+        <label>Roundness <output id="otR">70</output><input type="range" id="stR" min="0" max="100" value="70"></label>
+        <label>Weight <output id="otW">500</output><input type="range" id="stW" min="100" max="900" value="500"></label>
+        <label>Size <output id="otS">64</output><input type="range" id="stS" min="14" max="160" value="64"></label>
+        <button id="btI" aria-pressed="false">Italic</button>
+      </div>
+      <div contenteditable="true" spellcheck="false">The quick brown fox jumps over the lazy dog. 0123456789</div>
+    </div>
+    <div class="langs">
+      <div><small>Cyrillic</small><p>Съешь же ещё этих мягких французских булок, да выпей чаю.</p></div>
+      <div><small>Greek</small><p>Ξεσκεπάζω την ψυχοφθόρα βδελυγμία.</p></div>
+      <div><small>Vietnamese</small><p>Tiếng Việt có dấu thanh và rất nhiều nguyên âm.</p></div>
+      <div><small>Central European</small><p>Zażółć gęślą jaźń. Příliš žluťoučký kůň.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Every shape follows one rule.</h2>
+    <p class="lede">Inrond is drawn as if by a round pen. Stroke ends become true round caps, outer corners take half the stroke width, and joins stay crisp. Drag the roundness slider at the top to see these change.</p>
+    <p class="glyphs">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789 &amp;@#$%€£¥?!*+=→←↑↓ ÅÇÉÑÖŠŽ ąęłńśźż ЖЩЫЯ жщыя ΔΘΣΩ δθσω</p>
+  </section>
+
+  <section id="use">
+    <h2>Use it.</h2>
+    <div class="split">
+<pre><span class="c">/* 1. load */</span>
+<span class="k">@font-face</span> {
+  font-family: <span class="n">"Inrond"</span>;
+  src: url(<span class="n">"Inrond[ROND,opsz,wght].woff2"</span>) format(<span class="n">"woff2"</span>);
+  font-weight: <span class="n">100 900</span>;
+  font-display: swap;
+}
+
+<span class="c">/* 2. pick a roundness, 0 to 100 */</span>
+body {
+  font-family: <span class="n">"Inrond"</span>, sans-serif;
+  font-variation-settings: <span class="n">"ROND" 60</span>;
+}</pre>
+      <div class="side">
+        <div class="panel"><b>ROND 0</b> is the sharp design and matches Inter 4.1 outline for outline, so switching is free of layout shift.</div>
+        <div class="panel"><b>Static families</b> for apps without variable font support: Inrond Soft (50) and Inrond Round (100), nine weights each, roman and italic.</div>
+        <div class="panel"><b>License:</b> SIL Open Font License 1.1. Free for personal and commercial work.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Inrond 1.0 · built on <a href="https://rsms.me/inter/">Inter</a> by Rasmus Andersson · SIL OFL 1.1</span>
+    <span>Not affiliated with or endorsed by the Inter project.</span>
+  </footer>
+</main>
+<script>
+const root = document.documentElement, $ = id => document.getElementById(id);
+const set = (k, v) => root.style.setProperty(k, v);
+
+// hero
+let playing = !matchMedia('(prefers-reduced-motion: reduce)').matches, t0 = performance.now();
+$('bP').setAttribute('aria-pressed', playing);
+function hero(r) { set('--rond', r); $('sR').value = r; $('oR').value = Math.round(r); }
+function tick(now) {
+  if (playing) { const p = ((now - t0) / 5200) % 1; hero(50 + 50 * Math.cos(p * 2 * Math.PI)); }
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+const stop = () => { playing = false; $('bP').setAttribute('aria-pressed', false); };
+$('sR').addEventListener('input', e => { stop(); hero(+e.target.value); });
+$('sW').addEventListener('input', e => { set('--wght', e.target.value); $('oW').value = e.target.value; });
+$('bP').addEventListener('click', () => { playing = !playing; t0 = performance.now(); $('bP').setAttribute('aria-pressed', playing); });
+$('bI').addEventListener('click', e => { const on = $('word').classList.toggle('it'); e.target.setAttribute('aria-pressed', on); });
+
+// ramp
+$('ramp').innerHTML = [0, 20, 40, 60, 80, 100].map(r =>
+  `<div><span style="font-variation-settings:'ROND' ${r}">Rg</span><small>ROND ${r}</small></div>`).join('');
+
+// ui demo
+function ui(v) {
+  $('ui').style.setProperty('--ui', v); $('oU').value = v;
+  $('code').innerHTML =
+`<span class="k">:root</span> {
+  --round: <span class="n">${v}</span>;            <span class="c">/* 0 sharp … 100 round */</span>
+  --radius: calc(var(--round) * <span class="n">0.22px</span>);   <span class="c">/* ${(v * 0.22).toFixed(1)}px */</span>
+}
+<span class="k">body</span> {
+  font-family: <span class="n">"Inrond"</span>, sans-serif;
+  font-variation-settings: <span class="n">"ROND"</span> var(--round);
+}
+<span class="k">.button, .input, .card</span> {
+  border-radius: var(--radius);
+}`;
+}
+$('sU').addEventListener('input', e => ui(+e.target.value)); ui(60);
+
+// tester
+const T = $('tester');
+[['stR', '--tr', 'otR', ''], ['stW', '--tw', 'otW', ''], ['stS', '--size', 'otS', 'px']].forEach(([s, v, o, u]) =>
+  $(s).addEventListener('input', e => { T.style.setProperty(v, e.target.value + u); $(o).value = e.target.value; }));
+$('btI').addEventListener('click', e => {
+  const el = T.querySelector('[contenteditable]'); const on = el.style.fontStyle !== 'italic';
+  el.style.fontStyle = on ? 'italic' : 'normal'; e.target.setAttribute('aria-pressed', on);
+});
+</script>
+</body>
+</html>

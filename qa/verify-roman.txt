@@ -1,0 +1,15 @@
+glyphs checked: 2915 at 7 locations, 1024 px per em
+1 sharp     difference to the source at ROND 0:   worst 0 px 
+2 inside    glyphs drifting 4+ units outside:      399 of 2915 (worst 93 px, uni211F ROND 100 {'wght': 800, 'opsz': 32})
+3 monotone  glyphs regaining 6+ units of ink:      27 of 2915 (worst 34 px, r ROND 100 {'wght': 900, 'opsz': 14})
+            ink removed at ROND 100: median 2.5%, 95th pct 9.2%, max 46.4% (uni02D1)
+4 kinks     direction breaks in the source: 512 of 3-8 deg, 256 of 8-20 deg
+            gained at ROND 35               1271 of 3-8 deg, 21 of 8-20 deg
+            gained at ROND 70               1563 of 3-8 deg, 29 of 8-20 deg
+            gained at ROND 100              1469 of 3-8 deg, 30 of 8-20 deg
+            drift notes:   uni211F:93 uni20B4:83 uni0436:65 uni04DD.ss07:65 uni04C2:65 uni04DD:65 uni046D:41 r:38 uni024D:38 racute:38 uni0157:38 rcaron:38 uni0211:38 uni0213:38 uni1E59:38 uni1E5B:38 uni1E5D:38 uni1E5F:38 uni0157.ss03:38 uni1E59.ss07:38 uni1E5B.ss07:38 uni1E5D.ss07:38 uni0157.ss07:38 rturn:34 rturnrthook:34
+            8+ deg breaks at ROND 100 in 20 glyphs: f.i:2 f.i.1:2 uni0362:2 _part.f_base:2 f:2 f.1:2 feng.1:2 feng:2 f.sups:2 ogonek.y:2 five.dnom:1 uni03C2:1 uni0351:1 four.dnom.ss01:1 six.dnom:1 uni02C3:1 uni1DEC:1 uni1DC7:1 uni1DEB:1 uni1DCE:1
+5 metrics   advance width mismatches: 0
+6 shaping   differing runs: 0 of 504
+
+ALL CHECKS PASSED

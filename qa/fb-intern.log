@@ -1,0 +1,12 @@
+C:\Users\harva\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fontbakery\fonts_profile.py:103: UserWarning: Failed to load fontbakery.checks.vendorspecific.googlefonts.glyphsets.shape_languages: No module named 'glyphsets'
+  warnings.warn("Failed to load %s: %s" % (import_path, e))
+Start ... running 127 individual check executions.
+Intern[opsz,wght].ttf: opentype/gdef_spacing_marks: WARN [spacing-mark-glyphs]
+Intern[opsz,wght].ttf: opentype/xavgcharwidth: WARN [xAvgCharWidth-wrong]
+Intern[opsz,wght].ttf: family/win_ascent_and_descent: FAIL [descent, ascent]
+Intern[opsz,wght].ttf: interpolation_issues: WARN [interpolation-issues]
+Intern[opsz,wght].ttf: overlapping_path_segments: WARN [overlapping-path-segments]
+Intern[opsz,wght].ttf: smart_dropout: FAIL [lacks-smart-dropout]
+
+ ERROR: 0 FATAL: 0 FAIL: 2 WARN: 4 INFO: 3 SKIP: 19 PASS: 99
+A report in markdown format has been saved to "qa/fontbakery-intern.md"
