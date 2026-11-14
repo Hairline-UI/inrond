@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { Thumb } from "@/components/Thumb";
 
 /* The page's small parts: the tray that holds a sheet, icons, the copy button, the code panel and the theme switch.
    Corners come from the dial (--rp tray, --rs sheet inside it, concentric). */
@@ -67,21 +68,23 @@ export function FileMark({ name }: { name: string }) {
   const ext = name.slice(name.lastIndexOf(".") + 1).toLowerCase();
   const tag = ext === "html" ? "<>" : ext === "css" ? "#" : ext === "py" ? "py" : ext === "sh" ? "$" : "·";
   return (
-    <span className="filemark" aria-hidden>
+    <span className={`filemark filemark--${ext}`} aria-hidden>
       <span className="filemark__tag">{tag}</span>
     </span>
   );
 }
 
-/* Monochrome syntax: tone and weight only. */
+/* Syntax colours (the one place on the page with hue, at the owner's request). */
 type Tok = [kind: string, text: string];
 const RULES: [string, RegExp][] = [
   ["comment", /^\/\*[\s\S]*?\*\/|^#.*$/],
   ["string", /^"[^"]*"|^'[^']*'/],
   ["tag", /^<\/?[a-zA-Z][\w-]*|^\/?>/],
+  ["fn", /^[a-z-]+(?=\()/],
+  ["attr", /^[a-z-]+(?==)/],
   ["key", /^[a-z-]+(?=\s*:)|^--[\w-]+/],
   ["num", /^-?\d*\.?\d+(px|ms|s|%|em|rem)?/],
-  ["sel", /^[.:@]?[a-zA-Z][\w-]*(?=[^;:"]*\{)/],
+  ["sel", /^[.:@]?[a-zA-Z][\w-]*(?=[^;"]*\{)/],
   ["punct", /^[{}();:,=*/]/],
   ["plain", /^[^\s"'<>{}();:,=*/.]+|^\s+|^./],
 ];
@@ -122,6 +125,7 @@ export function CodePanel({
       <figcaption className="plate__bar code__bar">
         {files.length > 1 ? (
           <div className="tabs" role="tablist" aria-label="Files">
+            <Thumb />
             {files.map((x, i) => (
               <button
                 key={x.name + i}

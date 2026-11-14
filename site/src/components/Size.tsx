@@ -18,7 +18,7 @@ export function Size() {
         id="size-title"
         title={
           <>
-            The axis costs bytes. <span className="mute">Freeze it and most of that goes.</span>
+            It’s bigger than Inter. <span className="mute">Here’s by how much, and how to shrink it.</span>
           </>
         }
         text={

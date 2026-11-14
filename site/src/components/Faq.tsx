@@ -36,7 +36,7 @@ export function Faq() {
         <div className="faq__title">
           <p className="label">Questions</p>
           <h2 id="faq-title" className="h2">
-            The objections, <span className="mute">answered first.</span>
+            Questions people ask, <span className="mute">answered plainly.</span>
           </h2>
           <p className="dim">Anything else goes to the issue tracker on GitHub, where the answers stay public.</p>
         </div>

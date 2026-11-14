@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Dial, DialValue } from "@/components/Dial";
 import { Head } from "@/components/Frame";
 import { Plate } from "@/components/Kit";
+import { Thumb } from "@/components/Thumb";
 
 const SAMPLES: Record<string, string> = {
   Latin: "Quick wafting zephyrs vex bold Jim, 0123456789.",
@@ -36,6 +37,7 @@ export function Tester() {
           bar={
             <>
               <div className="seg" role="radiogroup" aria-label="Script">
+                <Thumb />
                 {Object.keys(SAMPLES).map((s) => (
                   <button key={s} type="button" className="seg__b" role="radio" aria-checked={script === s} onClick={() => setScript(s)}>
                     {s}
@@ -43,6 +45,7 @@ export function Tester() {
                 ))}
               </div>
               <div className="seg" role="radiogroup" aria-label="Style">
+                <Thumb />
                 {["Roman", "Italic"].map((s) => (
                   <button
                     key={s}

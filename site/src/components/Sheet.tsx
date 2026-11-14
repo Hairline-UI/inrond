@@ -30,10 +30,10 @@ export function Sheet() {
         id="coverage-title"
         title={
           <>
-            All of Inter, <span className="mute">rounded by the same rule.</span>
+            Every letter Inter has, <span className="mute">rounded the same way.</span>
           </>
         }
-        text="2,937 glyphs and 2,852 characters: Latin with Vietnamese, 249 Cyrillic, 105 Greek, figures, arrows and symbols, the optical size axis and Inter's drawn italic. Every one of them has the axis. Point at a letter to inspect it."
+        text="2,937 glyphs and 2,852 characters: Latin with Vietnamese, 249 Cyrillic, 105 Greek, figures, arrows and symbols, the optical size axis and Inter's drawn italic. Every one of them has the axis. Tap or point at a letter to see it large, with Inter's outline hatched underneath."
       />
       <div className="wrap" ref={stage}>
         <Plate

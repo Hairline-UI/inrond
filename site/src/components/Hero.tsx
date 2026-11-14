@@ -16,11 +16,12 @@ const TOP = 1700;
 const BOTTOM = 820;
 const PADX = 70;
 
-function GlyphDrawing({ onInk }: { onInk: (pct: number) => void }) {
+function GlyphDrawing() {
   const fill = useRef<SVGPathElement>(null);
   const handles = useRef<SVGPathElement>(null);
   const onPts = useRef<SVGPathElement>(null);
   const offPts = useRef<SVGPathElement>(null);
+  const svg = useRef<SVGSVGElement>(null);
 
   const sharp = useMemo(() => WORD.map((c, i) => build(G[c], G[c].paths[0], X0[i]).d).join(""), []);
 
@@ -40,9 +41,7 @@ function GlyphDrawing({ onInk }: { onInk: (pct: number) => void }) {
     handles.current?.setAttribute("d", h);
     onPts.current?.setAttribute("d", onD);
     offPts.current?.setAttribute("d", offD);
-    const area = WORD.reduce((s, c) => s + areaAt(G[c], v), 0);
-    onInk(100 - (100 * area) / AREA0);
-  });
+  }, svg);
 
   const lines: [number, string][] = [
     [data.capHeight, "cap height"],
@@ -54,6 +53,7 @@ function GlyphDrawing({ onInk }: { onInk: (pct: number) => void }) {
 
   return (
     <svg
+      ref={svg}
       className="drawing"
       viewBox={`${-PADX} ${-TOP} ${WIDTH + PADX * 2} ${TOP + BOTTOM}`}
       role="img"
@@ -103,9 +103,16 @@ export function Hero() {
   const ink = useRef<HTMLSpanElement>(null);
   const inkBar = useRef<HTMLSpanElement>(null);
 
+  // The ink readout is cheap, so it follows the dial on its own, whether or not the drawing is on screen.
+  useDial((v) => {
+    const p = 100 - (100 * WORD.reduce((s, c) => s + areaAt(G[c], v), 0)) / AREA0;
+    if (ink.current) ink.current.textContent = p.toFixed(1);
+    if (inkBar.current) inkBar.current.style.transform = `scaleX(${Math.min(1, p / 4)})`;
+  });
+
   useEffect(() => {
     // Opening sweep: from the painted setting through round and sharp, back where it started.
-    const t = setTimeout(() => playDial([DEFAULT_ROND, 100, 0, DEFAULT_ROND], 3200), 450);
+    const t = setTimeout(() => playDial([DEFAULT_ROND, 100, 0, DEFAULT_ROND], 2800), 450);
     return () => clearTimeout(t);
   }, []);
 
@@ -169,12 +176,7 @@ export function Hero() {
             </div>
           }
         >
-          <GlyphDrawing
-            onInk={(p) => {
-              if (ink.current) ink.current.textContent = p.toFixed(1);
-              if (inkBar.current) inkBar.current.style.transform = `scaleX(${Math.min(1, p / 4)})`;
-            }}
-          />
+          <GlyphDrawing />
         </Plate>
       </div>
 

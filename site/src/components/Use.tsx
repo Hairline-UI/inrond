@@ -4,6 +4,7 @@ import { useState } from "react";
 import { CDN, DOWNLOAD, REPO } from "@/data/site";
 import { Head } from "@/components/Frame";
 import { CodePanel } from "@/components/Kit";
+import { Thumb } from "@/components/Thumb";
 
 const STEPS = [
   {
@@ -40,23 +41,22 @@ export function Use() {
         id="use-title"
         title={
           <>
-            Three steps of CSS. <span className="mute">Nothing to build.</span>
+            Three steps of CSS. <span className="mute">No build step, no package.</span>
           </>
         }
         text="The release has the variable fonts with the axis, frozen Round and Soft builds, web subsets and 36 static fonts. Everything is under the SIL Open Font License: use it in any project, commercial included, and redistribute it freely."
       />
       <div className="wrap use">
-        <ol className="steps">
+        <div className="steps" role="group" aria-label="Steps">
+          <Thumb />
           {STEPS.map((s, i) => (
-            <li key={s.t}>
-              <button type="button" className="step" aria-pressed={step === i} onClick={() => setStep(i)}>
-                <span className="step__n mono">{String(i + 1).padStart(2, "0")}</span>
-                <span className="step__t">{s.t}</span>
-                <span className="step__d">{s.d}</span>
-              </button>
-            </li>
+            <button key={s.t} type="button" className="step" aria-pressed={step === i} onClick={() => setStep(i)}>
+              <span className="step__n mono">{String(i + 1).padStart(2, "0")}</span>
+              <span className="step__t">{s.t}</span>
+              <span className="step__d">{s.d}</span>
+            </button>
           ))}
-        </ol>
+        </div>
         <div className="use__code">
           <CodePanel files={STEPS.map((s) => s.file)} active={step} onPick={setStep} />
           <div className="extras">

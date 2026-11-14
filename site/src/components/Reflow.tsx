@@ -1,12 +1,13 @@
 "use client";
 
-import { useCallback, useRef } from "react";
-import { getDial, reducedMotion, useDial, useOnce } from "@/lib/dial";
+import { useCallback, useRef, useState } from "react";
+import { getDial, isPlaying, playDial, reducedMotion, useDial, useOnce } from "@/lib/dial";
 import { Head } from "@/components/Frame";
 import { Plate } from "@/components/Kit";
+import { Dial, DialValue } from "@/components/Dial";
 
 const TEXT =
-  "Switch a product from Inter to Inrond and nothing in the layout moves. Each letter keeps Inter’s advance width, kerning and shaping at every setting of the axis, so a label that fitted still fits, a table column stays put and a line break lands on the same word. Turn the dial anywhere on this page and watch the ends of these lines.";
+  "Switch a product from Inter to Inrond and nothing moves. Every letter keeps Inter’s exact width at every roundness, so a label that fitted still fits, a table column stays put and each line breaks on the same word.";
 
 /** Right edges of each rendered line of a text block, relative to the block. */
 function lineEnds(el: HTMLElement) {
@@ -29,70 +30,42 @@ export function Reflow() {
   const ghost = useRef<HTMLParagraphElement>(null);
   const ticks = useRef<HTMLDivElement>(null);
   const block = useRef<HTMLDivElement>(null);
+  const [playing, setPlaying] = useState(false);
   const out = {
-    set: useRef<HTMLSpanElement>(null),
     lines: useRef<HTMLSpanElement>(null),
     moved: useRef<HTMLSpanElement>(null),
     widest: useRef<HTMLSpanElement>(null),
   };
-  const sweeping = useRef(false);
-  const frame = useRef(0);
 
-  const measure = useCallback((v: number) => {
+  const measure = useCallback(() => {
     const a = live.current;
     const b = ghost.current;
     if (!a || !b) return;
     const la = lineEnds(a);
     const lb = lineEnds(b);
-    let moved = 0;
+    let moved = la.length === lb.length ? 0 : Infinity;
     la.forEach(([, x], i) => (moved = Math.max(moved, Math.abs(x - (lb[i]?.[1] ?? x)))));
-    if (la.length !== lb.length) moved = Infinity;
     const widest = Math.max(...la.map(([, x]) => x));
-    if (out.set.current) out.set.current.textContent = String(Math.round(v));
     if (out.lines.current) out.lines.current.textContent = String(la.length);
     if (out.moved.current) out.moved.current.textContent = Number.isFinite(moved) ? moved.toFixed(2) : "reflowed";
     if (out.widest.current) out.widest.current.textContent = widest.toFixed(1);
     if (ticks.current) {
-      ticks.current.innerHTML = la
-        .map(([top, x]) => `<i style="top:${top}px;left:${x.toFixed(1)}px"></i>`)
-        .join("");
+      const html = la.map(([top, x]) => `<i style="top:${top}px;left:${x.toFixed(1)}px"></i>`).join("");
+      if (ticks.current.innerHTML !== html) ticks.current.innerHTML = html;
     }
   }, []);
 
-  const apply = useCallback(
-    (v: number) => {
-      block.current?.style.setProperty("--prond", v.toFixed(2));
-      cancelAnimationFrame(frame.current);
-      frame.current = requestAnimationFrame(() => measure(v));
-    },
-    [measure]
-  );
+  // Measured in this browser on every frame the dial moves, while the paragraph is on screen.
+  useDial(measure, block);
 
-  useDial((v) => {
-    if (!sweeping.current) apply(v);
-  });
+  const play = useCallback(() => {
+    if (reducedMotion() || isPlaying()) return;
+    const from = getDial();
+    setPlaying(true);
+    playDial([from, 0, 100, from], 4200, () => setPlaying(false));
+  }, []);
 
-  const sweep = useCallback(() => {
-    if (reducedMotion()) return;
-    sweeping.current = true;
-    const keys = [getDial(), 0, 100, getDial()];
-    const ms = 3600;
-    const t0 = performance.now();
-    const step = (now: number) => {
-      const e = Math.min(1, (now - t0) / ms);
-      const seg = Math.min(2, Math.floor(e * 3));
-      const t = e * 3 - seg;
-      const s = t * t * (3 - 2 * t);
-      const v = keys[seg] + (keys[seg + 1] - keys[seg]) * s;
-      block.current?.style.setProperty("--prond", v.toFixed(2));
-      measure(v);
-      if (e < 1) requestAnimationFrame(step);
-      else sweeping.current = false;
-    };
-    requestAnimationFrame(step);
-  }, [measure]);
-
-  const stage = useOnce(sweep, 0.35);
+  const stage = useOnce(play, 0.45, 400);
 
   return (
     <section id="reflow" className="sec" aria-labelledby="reflow-title">
@@ -101,10 +74,10 @@ export function Reflow() {
         id="reflow-title"
         title={
           <>
-            The corners change. <span className="mute">The line breaks don’t.</span>
+            Round it as much as you like. <span className="mute">Nothing on the page moves.</span>
           </>
         }
-        text="Rounded fonts are usually separate designs with their own widths, so switching to one re-wraps every paragraph and every button. Inrond is measured against Inter glyph by glyph: zero advance widths differ, at any roundness."
+        text="Rounded fonts are usually separate designs with their own letter widths, so switching to one re-wraps paragraphs and pushes buttons out of shape. Inrond keeps Inter's exact widths at every roundness. Press play, or drag, and watch the marks at the end of each line: the letters change, the marks don't move."
       />
       <div className="wrap reflow" ref={stage}>
         <Plate
@@ -115,12 +88,25 @@ export function Reflow() {
                 <span className="glyphmark" aria-hidden>
                   ¶
                 </span>
-                Paragraph <span className="dim">· 450 · line ends marked</span>
+                Paragraph <span className="dim">· line ends marked</span>
               </span>
-              <span className="legend">
-                <i className="legend__ghost" aria-hidden /> ROND 0 underneath
+              <span className={playing ? "rcount is-live" : "rcount"}>
+                ROND <DialValue />
               </span>
             </>
+          }
+          foot={
+            <div className="reflow__controls">
+              <button type="button" className="btn btn--solid btn--sm" onClick={play} aria-pressed={playing}>
+                <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden>
+                  <path d="M3 1.8v8.4L10 6z" fill="currentColor" />
+                </svg>
+                {playing ? "Playing 0 → 100" : "Play 0 → 100"}
+              </button>
+              <div className="reflow__dial">
+                <Dial id="dial-reflow" compact label="Roundness of the whole page" />
+              </div>
+            </div>
           }
         >
           <div className="reflow__block" ref={block}>
@@ -135,11 +121,18 @@ export function Reflow() {
         </Plate>
         <aside className="reflow__side" aria-label="Measured in your browser">
           <p className="side__k">Measured in your browser, every frame</p>
+          <div className="moved">
+            <span className="moved__v">
+              <span ref={out.moved}>0.00</span>
+              <small>px</small>
+            </span>
+            <span className="moved__k">the furthest any line end has moved from where Inter puts it</span>
+          </div>
           <dl className="readouts">
             <div>
-              <dt>This paragraph at ROND</dt>
+              <dt>Roundness now</dt>
               <dd>
-                <span ref={out.set}>64</span>
+                <DialValue />
               </dd>
             </div>
             <div>
@@ -155,21 +148,11 @@ export function Reflow() {
                 <small> px</small>
               </dd>
             </div>
-            <div>
-              <dt>Furthest a line end moved from ROND 0</dt>
-              <dd>
-                <span ref={out.moved}>0.00</span>
-                <small> px</small>
-              </dd>
-            </div>
           </dl>
           <p className="side__note">
-            The grey underneath is the same paragraph set at ROND 0. It shows only at the corners the round pen took away; the
-            line ends never part.
+            The light grey under the text is the same paragraph at ROND 0, which is Inter. You only see it at the corners the
+            rounding removes.
           </p>
-          <button type="button" className="btn btn--soft btn--sm" onClick={sweep}>
-            Run 0 to 100 again
-          </button>
         </aside>
       </div>
     </section>

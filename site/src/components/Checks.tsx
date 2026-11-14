@@ -13,11 +13,11 @@ export function Checks() {
     <section id="checks" className="sec" aria-labelledby="checks-title">
       <Head
         center
-        label="Verification"
+        label="Tests"
         id="checks-title"
         title={
           <>
-            Measured, <span className="mute">not claimed.</span>
+            Checked against Inter, <span className="mute">glyph by glyph.</span>
           </>
         }
         text="A test suite rasterises every glyph with FreeType at 1,024 pixels per em and compares it with Inter at seven weight and optical size locations, at roundness 0, 35, 70 and 100. Both styles pass all six checks."
