@@ -12,7 +12,6 @@ export function Checks() {
   return (
     <section id="checks" className="sec" aria-labelledby="checks-title">
       <Head
-        center
         label="Tests"
         id="checks-title"
         title={

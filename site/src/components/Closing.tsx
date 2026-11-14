@@ -99,7 +99,7 @@ export function Closing() {
           <strong>Hairline UI</strong>
           <Arrow dir="up-right" />
         </a>
-        <span className="footbar__c">© 2026 Hairline UI</span>
+        <span className="footbar__c">© 2026 Inrond</span>
       </div>
     </section>
   );

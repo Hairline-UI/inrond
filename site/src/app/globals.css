@@ -2062,7 +2062,9 @@ svg text {
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
   gap: clamp(20px, 3vw, 40px);
-  margin: clamp(28px, 3.4vw, 44px) var(--pad) 0;
+  /* a .wrap: keep margin-inline auto so it stays on the page column, and inset it by the pad through its width */
+  width: calc(var(--col) - var(--pad) * 2);
+  margin-top: clamp(28px, 3.4vw, 44px);
   padding: clamp(24px, 3vw, 36px) 0 clamp(48px, 6vw, 80px);
   border-top: 1px solid var(--line);
 }
@@ -3218,4 +3220,16 @@ svg text {
 }
 .footbar__c {
   font-size: 12.5px;
+}
+/* Wider than a phone: one row, the credit on the left edge of the column, the copyright on the right */
+@media (min-width: 641px) {
+  .footbar {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px var(--pad);
+    text-align: left;
+  }
+  .maker {
+    margin-left: -10px;
+  }
 }
