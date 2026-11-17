@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { GeistMono } from "geist/font/mono";
 import "./globals.css";
+import fonts from "@/data/fonts.json";
 
 const title = "Inrond: Inter, with a roundness axis";
 const description =
@@ -30,8 +31,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={GeistMono.variable} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-        <link rel="preload" href="/fonts/Inrond.latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        <link rel="stylesheet" href="/fonts/inrond.css" />
+        <link rel="preload" href={`${fonts.base}/Inrond.latin.woff2`} as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="stylesheet" href={`${fonts.base}/inrond.css`} />
       </head>
       <body>
         {children}
