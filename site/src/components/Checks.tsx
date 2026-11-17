@@ -16,20 +16,20 @@ export function Checks() {
         id="checks-title"
         title={
           <>
-            Checked against Inter, <span className="mute">glyph by glyph.</span>
+            Checked against Inter, <span className="mute">letter by letter.</span>
           </>
         }
-        text="A test suite rasterises every glyph with FreeType at 1,024 pixels per em and compares it with Inter at seven weight and optical size locations, at roundness 0, 35, 70 and 100. Both styles pass all six checks."
+        text="Every letter is drawn and compared with Inter, pixel by pixel, at seven weights and sizes and four roundness settings. Roman and italic both pass all six checks."
       />
-      <div className="wrap report-wrap" ref={stage}>
-        <div className="plate report" ref={sheet}>
+      <div className="wrap grid sec-body" ref={stage}>
+        <div className="span-full plate report" ref={sheet}>
           <div className="plate__bar">
-            <span className="bar__name mono">
+            <span className="bar__name">
               <FileMark name="verify.py" />
-              tests/verify.py
+              Test report <span className="dim">· every letter, both styles</span>
             </span>
             <span className="report__meta mono">
-              <span>2,915 roman · 2,879 italic glyphs</span>
+              <span>2,915 roman · 2,879 italic</span>
               <span className="chip chip--on">6 of 6 pass</span>
             </span>
           </div>
@@ -38,8 +38,7 @@ export function Checks() {
             <thead>
               <tr>
                 <th scope="col">Check</th>
-                <th scope="col">What it proves</th>
-                <th scope="col">Fails at</th>
+                <th scope="col">What it means</th>
                 <th scope="col">Roman</th>
                 <th scope="col">Italic</th>
                 <th scope="col">
@@ -54,7 +53,6 @@ export function Checks() {
                     <span className="mono dim">{i + 1}</span> {c.name}
                   </th>
                   <td>{c.rule}</td>
-                  <td className="dim">{c.limit}</td>
                   <td className="mono">{c.roman}</td>
                   <td className="mono">{c.italic}</td>
                   <td>
@@ -72,12 +70,10 @@ export function Checks() {
           </table>
           </div>
           <div className="report__end">
-            <p className="report__ok">All checks passed, roman and italic.</p>
+            <p className="report__ok">All six checks pass, in roman and italic.</p>
             <p className="dim">
-              Below the limits, reported and not hidden: round stroke ends pass Inter&rsquo;s outline by up to 24 units, as far as
-              Inter&rsquo;s own o passes the baseline; the median glyph loses 1.0% of its ink at ROND 100. FontBakery&rsquo;s universal profile: 3 fails, all inherited from
-              Inter and kept on purpose, against Inter&rsquo;s 6.{" "}
-              <a href={`${REPO}/tree/main/qa`}>Read the reports</a>
+              FontBakery, the standard font checker, flags 3 small issues. All three come from Inter itself (it flags 6 in
+              Inter) and are left alone so Inrond stays a drop-in. <a href={`${REPO}/tree/main/qa`}>Read the full reports</a>
             </p>
           </div>
         </div>

@@ -77,11 +77,11 @@ export function Reflow() {
             Round it as much as you like. <span className="mute">Nothing on the page moves.</span>
           </>
         }
-        text="Rounded fonts are usually separate designs with their own letter widths, so switching to one re-wraps paragraphs and pushes buttons out of shape. Inrond keeps Inter's exact widths at every roundness. Press play, or drag, and watch the marks at the end of each line: the letters change, the marks don't move."
+        text="Most rounded fonts have letter widths of their own, so switching to one re-wraps paragraphs and pushes buttons out of shape. Inrond keeps Inter's widths at every setting. Press play and watch the end of each line: the letters change, the line ends stay put."
       />
-      <div className="wrap reflow" ref={stage}>
+      <div className="wrap grid sec-body" ref={stage}>
         <Plate
-          className="reflow__plate"
+          className="span-main reflow__plate"
           bar={
             <>
               <span className="bar__name">
@@ -119,8 +119,18 @@ export function Reflow() {
             <div className="reflow__ticks" ref={ticks} aria-hidden />
           </div>
         </Plate>
-        <aside className="reflow__side" aria-label="Measured in your browser">
-          <p className="side__k">Measured in your browser, every frame</p>
+        <Plate
+          className="span-side reflow__sidep"
+          sheetClass="reflow__side"
+          bar={
+            <span className="bar__name">
+              <span className="glyphmark" aria-hidden>
+                ⟷
+              </span>
+              Measured live <span className="dim">· in your browser</span>
+            </span>
+          }
+        >
           <div className="moved">
             <span className="moved__v">
               <span ref={out.moved}>0.00</span>
@@ -150,10 +160,9 @@ export function Reflow() {
             </div>
           </dl>
           <p className="side__note">
-            The light grey under the text is the same paragraph at ROND 0, which is Inter. You only see it at the corners the
-            rounding removes.
+            The grey under the text is the same paragraph in Inter. It only shows at the corners that get rounded.
           </p>
-        </aside>
+        </Plate>
       </div>
     </section>
   );

@@ -16,11 +16,11 @@ export function Closing() {
   });
   return (
     <section className="sec end" aria-labelledby="end-title">
-      <div className="wrap end__head">
-        <h2 id="end-title" className="h2">
-          The whole axis, <span className="mute">in one word.</span>
+      <div className="wrap grid end__head">
+        <h2 id="end-title" className="h2 span-main">
+          From sharp to round, <span className="mute">in one word.</span>
         </h2>
-        <div className="end__cta">
+        <div className="span-side end__cta">
           <div className="end__btns">
             <a className="btn btn--solid" href={DOWNLOAD} data-oa-event="download" data-oa-prop-location="closing">
               Download {VERSION}
@@ -49,29 +49,29 @@ export function Closing() {
           ))}
         </div>
       </div>
-      <footer className="wrap colophon">
-        <div className="colophon__cell">
+      <footer className="wrap grid colophon">
+        <div className="span-3 colophon__cell">
           <p className="side__k">Colophon</p>
           <p>
-            This page is set in Inrond {VERSION} at the roundness you chose, now <DialValue className="mono" />. Figures and
-            code are in Geist Mono.
+            This page is set in Inrond {VERSION} at the roundness you chose: <DialValue className="mono" />. Numbers and code
+            are in Geist Mono.
           </p>
         </div>
-        <div className="colophon__cell">
+        <div className="span-3 colophon__cell">
           <p className="side__k">Credit</p>
           <p>
             Inrond is derived from <a href={INTER}>Inter</a> by Rasmus Andersson and the Inter Project Authors. It is not affiliated
             with or endorsed by the Inter project. &ldquo;Inter&rdquo; is a trademark of rsms.
           </p>
         </div>
-        <div className="colophon__cell">
+        <div className="span-3 colophon__cell">
           <p className="side__k">Licence</p>
           <p>
-            Fonts: <a href={`${REPO}/blob/main/OFL.txt`}>SIL Open Font License 1.1</a>. Free to use, modify and redistribute; not
-            to be sold by itself.
+            <a href={`${REPO}/blob/main/OFL.txt`}>SIL Open Font License 1.1</a>. Free to use, change and share; not to be sold on
+            its own.
           </p>
         </div>
-        <nav className="colophon__cell colophon__links" aria-label="Links">
+        <nav className="span-3 colophon__cell colophon__links" aria-label="Links">
           <p className="side__k">Links</p>
           <a href={REPO} data-oa-event="github" data-oa-prop-location="footer">
             Repository
@@ -80,6 +80,7 @@ export function Closing() {
             Releases
           </a>
           <a href={`${REPO}/issues`}>Issues</a>
+          <a href={`${REPO}/blob/main/CHANGELOG.md`}>Changelog</a>
           <a href={`${REPO}/tree/main/qa`}>Test reports</a>
         </nav>
       </footer>

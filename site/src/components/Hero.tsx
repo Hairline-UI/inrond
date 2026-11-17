@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef } from "react";
-import { G, WORD, areaAt, build, data, f, numsAt } from "@/lib/glyph";
+import { G, WORD, build, data, f, numsAt } from "@/lib/glyph";
 import { DOWNLOAD, INTER, VERSION } from "@/data/site";
 import { DEFAULT_ROND, playDial, useDial } from "@/lib/dial";
 import { Dial, DialValue, Presets } from "@/components/Dial";
@@ -11,8 +11,6 @@ import { StarButton } from "@/components/Stars";
 const ADV = WORD.map((c) => G[c].adv);
 const X0 = [0, ADV[0]];
 const WIDTH = ADV[0] + ADV[1];
-const AREA0 = WORD.reduce((s, c) => s + G[c].area[0], 0);
-const POINTS = WORD.reduce((s, c) => s + G[c].paths[0].length / 2, 0);
 const TOP = 1700;
 const BOTTOM = 820;
 const PADX = 70;
@@ -104,11 +102,11 @@ export function Hero({ stars }: { stars: number | null }) {
   const ink = useRef<HTMLSpanElement>(null);
   const inkBar = useRef<HTMLSpanElement>(null);
 
-  // The ink readout is cheap, so it follows the dial on its own, whether or not the drawing is on screen.
+  // The roundness readout follows the dial on its own, whether or not the drawing is on screen.
   useDial((v) => {
-    const p = 100 - (100 * WORD.reduce((s, c) => s + areaAt(G[c], v), 0)) / AREA0;
-    if (ink.current) ink.current.textContent = p.toFixed(1);
-    if (inkBar.current) inkBar.current.style.transform = `scaleX(${Math.min(1, p / 4)})`;
+    const t = String(Math.round(v));
+    if (ink.current && ink.current.textContent !== t) ink.current.textContent = t;
+    if (inkBar.current) inkBar.current.style.transform = `scaleX(${(v / 100).toFixed(3)})`;
   });
 
   useEffect(() => {
@@ -119,17 +117,17 @@ export function Hero({ stars }: { stars: number | null }) {
 
   return (
     <section className="hero" aria-labelledby="hero-title">
-      <div className="wrap hero__grid">
-        <div className="hero__words">
+      <div className="wrap grid hero__grid">
+        <div className="span-main hero__words">
           <p className="eyebrow">
-            <span className="chip">v{VERSION}</span> Free variable font · SIL Open Font License
+            <span className="chip">v{VERSION}</span> Free and open source
           </p>
           <h1 id="hero-title" className="display">
             Inter, with a <span className="mute">roundness axis.</span>
           </h1>
           <p className="lede">
-            Pick how round your letters are, from 0 (Inter, unchanged) to 100. Tie it to your border-radius token and your type
-            matches your interface. Every letter keeps Inter&rsquo;s width, so swapping it in moves nothing on the page.
+            Choose how round your letters are, from 0 (plain Inter) to 100 (fully round). Use the same number as your corner
+            radius and your text matches your buttons. Every letter keeps Inter&rsquo;s width, so nothing on your page moves.
           </p>
           <div className="hero__cta">
             <a className="btn btn--solid" href={DOWNLOAD} data-oa-event="download" data-oa-prop-location="hero">
@@ -146,17 +144,17 @@ export function Hero({ stars }: { stars: number | null }) {
         </div>
 
         <Plate
-          className="hero__plate"
+          className="span-side hero__plate"
           bar={
             <>
               <span className="bar__name">
                 <span className="glyphmark" aria-hidden>
                   a
                 </span>
-                a s <span className="dim">· wght 800 · opsz 32</span>
+                a s <span className="dim">· ExtraBold</span>
               </span>
               <span className="legend">
-                <i className="legend__hatch" aria-hidden /> removed ink
+                <i className="legend__hatch" aria-hidden /> rounded off
               </span>
             </>
           }
@@ -179,34 +177,32 @@ export function Hero({ stars }: { stars: number | null }) {
         </Plate>
       </div>
 
-      <div className="wrap">
-        <div className="stats">
-          <div className="stat">
-            <span className="stat__k">Ink removed, a + s</span>
+      <div className="wrap grid">
+        <div className="span-full stats">
+          <div className="span-3 stat">
+            <span className="stat__k">Roundness now</span>
             <span className="stat__v">
-              <span ref={ink}>0.0</span>
-              <small>%</small>
+              <span ref={ink}>64</span>
+              <small> of 100</small>
             </span>
             <span className="meter" aria-hidden>
               <span ref={inkBar} />
             </span>
           </div>
-          <div className="stat">
-            <span className="stat__k">Width change</span>
-            <span className="stat__v">
-              0<small> units</small>
-            </span>
-            <span className="stat__n">1,162 + 1,103, as in Inter</span>
+          <div className="span-3 stat">
+            <span className="stat__k">Change in letter width</span>
+            <span className="stat__v">0</span>
+            <span className="stat__n">the same as Inter at every setting</span>
           </div>
-          <div className="stat">
-            <span className="stat__k">Outline points</span>
-            <span className="stat__v">{POINTS}</span>
-            <span className="stat__n">the same at every setting</span>
-          </div>
-          <div className="stat">
-            <span className="stat__k">Glyphs with the axis</span>
-            <span className="stat__v">2,937</span>
+          <div className="span-3 stat">
+            <span className="stat__k">Characters</span>
+            <span className="stat__v">2,852</span>
             <span className="stat__n">Latin, Cyrillic, Greek, Vietnamese</span>
+          </div>
+          <div className="span-3 stat">
+            <span className="stat__k">Styles</span>
+            <span className="stat__v">2</span>
+            <span className="stat__n">roman and a drawn italic, 100 to 900</span>
           </div>
         </div>
       </div>

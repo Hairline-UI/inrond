@@ -21,7 +21,7 @@ export const TICKER = [
 
 export type Row = [string, string, string, string, string, string];
 export const COMPARE: { head: string[]; rows: Row[] } = {
-  head: ["Inrond 1.0", "Inter 4.1", "Google Sans Flex", "Open Runde", "Intern"],
+  head: ["Inrond", "Inter", "Google Sans Flex", "Open Runde", "Intern"],
   rows: [
     ["Roundness", "Axis, 0 to 100", "None", "Axis, 0 to 100", "Fixed", "Fixed"],
     ["Design", "Inter", "Inter", "Google Sans", "Inter", "Inter"],
@@ -32,23 +32,23 @@ export const COMPARE: { head: string[]; rows: Row[] } = {
     ["Weight", "100 to 900", "100 to 900", "1 to 1000", "4 static", "100 to 900"],
     ["Optical size", "14 to 32", "14 to 32", "1 to 144", "No", "14 to 32"],
     ["OpenType features", "39", "39", "20", "6", "33"],
-    ["Full roman, woff2", "899 KB", "344 KB", "1,418 KB", "151 KB a weight", "170 KB"],
+    ["File size, roman", "899 KB", "344 KB", "1,418 KB", "151 KB a weight", "170 KB"],
   ],
 };
 
 export const SIZES = [
-  { build: "Inter 4.1", note: "the baseline", latin: 103, full: 344, kind: "base" },
-  { build: "Inrond Round", note: "frozen at 100", latin: 159, full: 540, kind: "frozen" },
-  { build: "Inrond Soft", note: "frozen at 50", latin: 163, full: 563, kind: "frozen" },
-  { build: "Inrond", note: "axis live", latin: 257, full: 899, kind: "live" },
-  { build: "Inrond Italic", note: "axis live", latin: 282, full: 995, kind: "live" },
+  { build: "Inter", note: "for reference", latin: 103, full: 344, kind: "base" },
+  { build: "Inrond Round", note: "fixed at 100", latin: 159, full: 540, kind: "frozen" },
+  { build: "Inrond Soft", note: "fixed at 50", latin: 163, full: 563, kind: "frozen" },
+  { build: "Inrond", note: "adjustable", latin: 257, full: 899, kind: "live" },
+  { build: "Inrond Italic", note: "adjustable", latin: 282, full: 995, kind: "live" },
 ] as const;
 
 export const CHECKS = [
-  { name: "Sharp", rule: "ROND 0 renders the same as Inter", limit: "any 4-unit difference", roman: "0 px", italic: "0 px" },
-  { name: "Inside", rule: "Round ends pass their cut no further than Inter’s o passes the baseline", limit: "8+ units beyond that", roman: "0 glyphs", italic: "0 glyphs" },
-  { name: "Monotone", rule: "More roundness never brings ink back", limit: "10+ units return", roman: "0 glyphs", italic: "0 glyphs" },
-  { name: "Kinks", rule: "New 8° direction breaks at ROND 100", limit: "over 2% of glyphs", roman: "13 of 58", italic: "18 of 57" },
-  { name: "Metrics", rule: "Advance widths that differ from Inter", limit: "any mismatch", roman: "0", italic: "0" },
-  { name: "Shaping", rule: "HarfBuzz runs that differ from Inter", limit: "any differing run", roman: "0 of 504", italic: "0 of 504" },
+  { name: "Inter at zero", rule: "At roundness 0, every letter is drawn exactly like Inter", roman: "0 px off", italic: "0 px off" },
+  { name: "No bulges", rule: "Rounding never adds ink beyond the slight overshoot an o already has", roman: "0 letters", italic: "0 letters" },
+  { name: "Only trims", rule: "Turning roundness up only ever takes ink away, never puts it back", roman: "0 letters", italic: "0 letters" },
+  { name: "Clean curves", rule: "Hardly any new kinks where a round end meets a curve (allowed: 2%)", roman: "13 letters", italic: "18 letters" },
+  { name: "Same widths", rule: "Every letter is exactly as wide as in Inter", roman: "0 differ", italic: "0 differ" },
+  { name: "Same layout", rule: "Text is shaped, kerned and spaced exactly as with Inter", roman: "0 of 504", italic: "0 of 504" },
 ] as const;

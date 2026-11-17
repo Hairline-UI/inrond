@@ -10,6 +10,13 @@ import { Plate } from "@/components/Kit";
 type Cell = { c: string; g: string; n: string; u: string; name: string; adv: number };
 const CELLS = sheet as Cell[];
 const START = CELLS.findIndex((x) => x.c === "ж");
+// Where Inter's lines sit, in ems from the baseline (2048 units to the em).
+const METRICS: [string, number][] = [
+  ["Cap height", 1490 / 2048],
+  ["x-height", 1118 / 2048],
+  ["Baseline", 0],
+  ["Descender", -494 / 2048],
+];
 
 export function Sheet() {
   const [sel, setSel] = useState(START);
@@ -33,12 +40,12 @@ export function Sheet() {
             Every letter Inter has, <span className="mute">rounded the same way.</span>
           </>
         }
-        text="2,937 glyphs and 2,852 characters: Latin with Vietnamese, 249 Cyrillic, 105 Greek, figures, arrows and symbols, the optical size axis and Inter's drawn italic. Every one of them has the axis. Tap or point at a letter to see it large, with Inter's outline hatched underneath."
+        text="All 2,852 characters of Inter, from Vietnamese accents to Cyrillic, Greek, arrows and symbols, in roman and italic. Every one of them rounds. Point at a letter to see it large, with Inter's shape in grey behind it."
       />
-      <div className="wrap" ref={stage}>
+      <div className="wrap grid sec-body" ref={stage}>
         <Plate
           dark
-          className="cov"
+          className="span-full cov"
           sheetClass="cov__sheet"
           bar={
             <>
@@ -46,7 +53,7 @@ export function Sheet() {
                 <span className="glyphmark" aria-hidden>
                   ж
                 </span>
-                48 of 2,937 glyphs <span className="dim">· weight 560 · ROND <DialValue /></span>
+                48 letters of 2,852 <span className="dim">· at roundness <DialValue /></span>
               </span>
               <span className="cov__scripts">
                 {["Latin", "Figures", "Vietnamese", "Greek", "Cyrillic", "Symbols"].map((g) => (
@@ -60,10 +67,10 @@ export function Sheet() {
           foot={
             <div className="cov__stats">
               {[
-                ["1,106", "glyphs with rounded corners"],
-                ["6,936", "corners rounded, roman"],
-                ["72", "composites rounded whole"],
-                ["16", "joining ends kept sharp"],
+                ["2,937", "glyphs"],
+                ["249", "Cyrillic characters"],
+                ["105", "Greek characters"],
+                ["39", "OpenType features"],
               ].map(([v, k]) => (
                 <div key={k} className="cov__stat">
                   <span className="mono">{v}</span>
@@ -94,12 +101,24 @@ export function Sheet() {
           ))}
         </div>
         <div className="inspect" aria-live="polite">
+          <div className="inspect__top mono">
+            <span>{cell.u}</span>
+            <span>
+              wght 560 · ROND <DialValue />
+            </span>
+          </div>
           <div className="inspect__stage">
+            <div className="inspect__metrics" aria-hidden>
+              {METRICS.map(([n, y]) => (
+                <span key={n} style={{ ["--y" as string]: y }}>
+                  <b>{n}</b>
+                </span>
+              ))}
+            </div>
             <span className="inspect__ghost" aria-hidden>
               {cell.c}
             </span>
             <span className="inspect__c">{cell.c}</span>
-            <span className="inspect__base" aria-hidden />
           </div>
           <dl className="inspect__dl">
             <div>
@@ -111,22 +130,9 @@ export function Sheet() {
               <dd className="mono">{cell.u}</dd>
             </div>
             <div>
-              <dt>Glyph</dt>
-              <dd className="mono">{cell.n}</dd>
-            </div>
-            <div>
-              <dt>Advance</dt>
+              <dt>Width</dt>
               <dd>
-                <span className="mono">{cell.adv.toLocaleString("en-US")} u</span>, as in Inter
-              </dd>
-            </div>
-            <div>
-              <dt>Shown at</dt>
-              <dd>
-                <span className="mono">
-                  ROND <DialValue />
-                </span>
-                , over ROND 0 in grey
+                <span className="mono">{cell.adv.toLocaleString("en-US")}</span> units, same as Inter
               </dd>
             </div>
           </dl>

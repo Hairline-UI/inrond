@@ -1,5 +1,6 @@
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
+import { Axes } from "@/components/Axes";
 import { Reflow } from "@/components/Reflow";
 import { Token } from "@/components/Token";
 import { Sheet } from "@/components/Sheet";
@@ -11,7 +12,7 @@ import { Use } from "@/components/Use";
 import { Tester } from "@/components/Tester";
 import { Faq } from "@/components/Faq";
 import { Closing } from "@/components/Closing";
-import { REPO_API, TICKER } from "@/data/site";
+import { REPO_API } from "@/data/site";
 
 // The star count at build time; the button refreshes it in the browser.
 async function getStars(): Promise<number | null> {
@@ -35,19 +36,11 @@ export default async function Home() {
       <Header />
       <main id="main">
         <Hero stars={stars} />
-        <div className="sec ticker" aria-label="What is in the font">
-          <ul className="wrap ticker__row">
-            {TICKER.map(([v, k]) => (
-              <li key={k}>
-                <span className="mono">{v}</span> {k}
-              </li>
-            ))}
-          </ul>
-        </div>
+        <Axes />
+        <Rule />
         <Reflow />
         <Token />
         <Sheet />
-        <Rule />
         <Checks />
         <Compare />
         <Size />

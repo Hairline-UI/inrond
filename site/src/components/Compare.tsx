@@ -18,18 +18,19 @@ export function Compare() {
             How it compares <span className="mute">with the fonts you’d pick instead.</span>
           </>
         }
-        text="Google Sans Flex has a roundness axis too, hand-designed, with far more axes and a more compact build. Inrond is for teams that want Inter specifically, or need Cyrillic, Greek and a drawn italic. Every figure here is read from the font files."
+        text="Google Sans Flex also has a roundness axis, with more axes and smaller files. Pick Inrond if you want Inter itself, or need Cyrillic, Greek and a real italic."
       />
-      <div className="wrap compare" style={{ ["--rival" as string]: rival + 2 }}>
+      <div className="wrap grid sec-body" style={{ ["--rival" as string]: rival + 2 }}>
         <Plate
-          className="cmp"
+          className="span-full cmp"
+          foot={<p className="fine compare__note">Goeist is left out: it rounds Geist, not Inter.</p>}
           bar={
             <>
               <span className="bar__name">
                 <span className="glyphmark" aria-hidden>
                   ≡
                 </span>
-                Read from the font files
+                Side by side <span className="dim">· read from each font&rsquo;s files</span>
               </span>
               <div className="seg rivals" role="radiogroup" aria-label="Compare Inrond with">
                 <Thumb />
@@ -69,10 +70,6 @@ export function Compare() {
           </table>
         </div>
         </Plate>
-        <p className="fine compare__note">
-          Open Runde and Intern figures are from an earlier measurement session; Inrond, Inter and Google Sans Flex were re-measured
-          for this release. Not compared: Goeist, which rounds Geist rather than Inter.
-        </p>
       </div>
     </section>
   );

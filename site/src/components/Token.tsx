@@ -26,7 +26,6 @@ export function Token() {
   const px = useRef<HTMLSpanElement>(null);
   const pct = useRef<HTMLSpanElement>(null);
   const [role, setRole] = useState("Member");
-  const [publish, setPublish] = useState(true);
 
   useDial((v) => {
     const r = v / 100;
@@ -115,12 +114,12 @@ export function Token() {
             One number for your corners <span className="mute">and your letters.</span>
           </>
         }
-        text="Drive the axis from the same token that sets your border-radius. Buttons, fields and type then round together, and changing one number restyles all of them. This page works that way."
+        text="Use one value for both your corner radius and the roundness of your text. Change it once and buttons, fields and words round together. This page works that way: pick a radius and watch everything follow."
       />
-      <div className="wrap token">
-        <div className="token__controls">
+      <div className="wrap grid sec-body">
+        <div className="span-main token__controls">
           <div className="token__k">
-            <span>Pick a radius</span>
+            <span>Pick a corner radius</span>
             <span className="dim">the whole page follows</span>
           </div>
           <div className="seg seg--radii" role="group" aria-label="Corner radius" ref={radii}>
@@ -138,7 +137,7 @@ export function Token() {
         </div>
 
         <Plate
-          className="token__plate"
+          className="span-side token__plate"
           sheetClass="token__stage"
           bar={
             <>
@@ -146,74 +145,43 @@ export function Token() {
                 <span className="glyphmark" aria-hidden>
                   ▢
                 </span>
-                Invite dialog <span className="dim">· every corner reads --round</span>
+                Example <span className="dim">· corners and text share one value</span>
               </span>
             </>
           }
         >
-          <div className="app" role="group" aria-label="Example product panel">
+          <div className="app app--compact" role="group" aria-label="Example product panel">
             <div className="app__top">
               <span className="app__ws" aria-hidden>
                 NS
               </span>
               <div>
-                <p className="app__t">Invite people to Northwind Studio</p>
-                <p className="app__s">They&rsquo;ll join 14 members on the Pro plan</p>
+                <p className="app__t">Invite to Northwind</p>
+                <p className="app__s">14 members on the Pro plan</p>
               </div>
-              <span className="app__x" aria-hidden>
-                Esc
-              </span>
             </div>
             <div className="app__field">
-              <span className="app__lbl">Email addresses</span>
+              <span className="app__lbl">Email</span>
               <div className="app__input">
-                <span className="tag">mira.okafor@northwind.studio</span>
-                <span className="tag">theo@lindqvist.se</span>
-                <span className="tag tag--warn">jun.park@northwind</span>
+                <span className="tag">mira@northwind.studio</span>
                 <span className="caret" aria-hidden />
               </div>
-              <span className="app__hint">jun.park@northwind needs a domain ending, like .studio</span>
             </div>
-            <div className="app__row">
-              <div className="app__field">
-                <span className="app__lbl">Role</span>
-                <div className="seg" role="radiogroup" aria-label="Role">
-                  <Thumb />
-                  {["Member", "Admin", "Guest"].map((r) => (
-                    <button key={r} type="button" className="seg__b" role="radio" aria-checked={role === r} onClick={() => setRole(r)}>
-                      {r}
-                    </button>
-                  ))}
-                </div>
-              </div>
-              <div className="app__field">
-                <span className="app__lbl">Seats after invite</span>
-                <p className="app__big">
-                  16 <span>of 20</span>
-                </p>
+            <div className="app__field">
+              <span className="app__lbl">Role</span>
+              <div className="seg" role="radiogroup" aria-label="Role">
+                <Thumb />
+                {["Member", "Admin", "Guest"].map((r) => (
+                  <button key={r} type="button" className="seg__b" role="radio" aria-checked={role === r} onClick={() => setRole(r)}>
+                    {r}
+                  </button>
+                ))}
               </div>
             </div>
-            <button type="button" className="switch" role="switch" aria-checked={publish} onClick={() => setPublish((p) => !p)}>
-              <span className="switch__t">
-                Can publish to production
-                <small>Admins can change this later in Settings → Roles</small>
-              </span>
-              <span className="switch__k" aria-hidden>
-                <i />
-              </span>
-            </button>
             <div className="app__foot">
-              <span className="app__link">Copy invite link</span>
-              <div className="app__btns">
-                <span className="btn btn--soft btn--sm">Cancel</span>
-                <span className="btn btn--solid btn--sm">Send 2 invites</span>
-              </div>
+              <span className="btn btn--soft btn--sm">Cancel</span>
+              <span className="btn btn--solid btn--sm">Send invite</span>
             </div>
-          </div>
-          <div className="toast" aria-hidden>
-            <span className="toast__dot" />
-            Invites sent to Mira and Theo
-            <span className="toast__undo">Undo</span>
           </div>
         </Plate>
       </div>

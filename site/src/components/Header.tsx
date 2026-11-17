@@ -7,11 +7,11 @@ import { Arrow, ThemeToggle } from "@/components/Kit";
 import { Thumb } from "@/components/Thumb";
 
 const NAV = [
+  ["Axes", "axes"],
   ["No reflow", "reflow"],
   ["One token", "token"],
-  ["Coverage", "coverage"],
-  ["The rule", "rule"],
-  ["Compare", "compare"],
+  ["Glyphs", "coverage"],
+  ["Tests", "checks"],
   ["Size", "size"],
   ["Use it", "use"],
 ] as const;

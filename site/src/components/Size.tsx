@@ -6,7 +6,7 @@ import { useOnce } from "@/lib/dial";
 import { Head } from "@/components/Frame";
 import { Plate } from "@/components/Kit";
 
-const MAX = 266;
+const MAX = Math.max(...SIZES.map((s) => s.latin));
 
 export function Size() {
   const bars = useRef<HTMLDivElement>(null);
@@ -21,58 +21,10 @@ export function Size() {
             It’s bigger than Inter. <span className="mute">Here’s by how much, and how to shrink it.</span>
           </>
         }
-        text={
-          <>
-            Rounding doubles the outline points, so with the axis live Inrond is 2.5 times Inter&rsquo;s Latin file. If your site
-            needs one roundness, ship Round or Soft at about 1.6 times Inter, or freeze any value with{" "}
-            <code className="mono">scripts/pin.py</code>.
-          </>
-        }
+        text="Rounded corners need more points per letter, so with roundness adjustable Inrond's file is 2.5 times Inter's. If your site uses one roundness, ship the fixed Round or Soft file instead: about 1.6 times Inter."
       />
-      <div className="wrap size" ref={stage}>
-        <div className="size__text">
-          <div className="pick">
-            <p className="side__k">Which file to ship</p>
-            <dl>
-              <div>
-                <dt>One roundness for the whole site</dt>
-                <dd>
-                  <span>
-                    <code className="mono">inrond-round.css</code> or <code className="mono">-soft</code>
-                  </span>
-                  <span className="mono dim">159–163 KB</span>
-                </dd>
-              </div>
-              <div>
-                <dt>Themes, hover states, animation</dt>
-                <dd>
-                  <span>
-                    <code className="mono">inrond.css</code>, axis live
-                  </span>
-                  <span className="mono dim">257 KB</span>
-                </dd>
-              </div>
-              <div>
-                <dt>Roman and italic, both live</dt>
-                <dd>
-                  <span>Freeze one, or load the italic lazily</span>
-                  <span className="mono dim">539 KB</span>
-                </dd>
-              </div>
-            </dl>
-          </div>
-          <div className="math">
-            <p className="side__k">What that means for a first visit</p>
-            <p>
-              <span className="mono">+154 KB</span> of Latin font over Inter with the axis live. At the 1.6 Mbit/s Lighthouse uses
-              for slow 4G that is about <span className="mono">0.77 s</span>; at 10 Mbit/s about <span className="mono">0.1 s</span>.
-              Text shows in the fallback until it arrives (<span className="mono">font-display: swap</span>), and the file is cached
-              after.
-            </p>
-            <p className="fine">Arithmetic from the file sizes, not a measurement on a live site.</p>
-          </div>
-        </div>
-        <div className="bars" ref={bars}>
+      <div className="wrap grid sec-body" ref={stage}>
+        <div className="span-main bars" ref={bars}>
           <Plate
             bar={
               <>
@@ -80,33 +32,82 @@ export function Size() {
                   <span className="glyphmark" aria-hidden>
                     ▤
                   </span>
-                  woff2 <span className="dim">· Latin subset, bars to scale</span>
+                  Download size <span className="dim">· English and Western Europe, drawn to scale</span>
                 </span>
-                <span className="mono dim">full font</span>
+                <span className="mono dim">all scripts</span>
               </>
             }
+            foot={
+              <p className="bars__aside">
+                <strong>For comparison:</strong> Google Sans Flex with the same three axes is <span className="mono">202 KB</span>,
+                Inrond <span className="mono">257 KB</span>. Inrond is not the smallest choice; it is the one that matches Inter.
+              </p>
+            }
           >
-          {SIZES.map((s, i) => (
-            <div key={s.build} className={`bar bar--${s.kind}`} style={{ ["--w" as string]: s.latin / MAX, ["--i" as string]: i }}>
-              <div className="bar__name">
-                <strong>{s.build}</strong> <span className="dim">{s.note}</span>
+            {SIZES.map((s, i) => (
+              <div key={s.build} className={`bar bar--${s.kind}`} style={{ ["--w" as string]: s.latin / MAX, ["--i" as string]: i }}>
+                <div className="bar__name">
+                  <strong>{s.build}</strong> <span className="dim">{s.note}</span>
+                </div>
+                <div className="bar__track">
+                  <span className="bar__fill" />
+                  <span className="bar__v mono">{s.latin} KB</span>
+                </div>
+                <span className="bar__full mono dim">{s.full} KB</span>
               </div>
-              <div className="bar__track">
-                <span className="bar__fill" />
-                <span className="bar__v mono">{s.latin} KB</span>
-              </div>
-              <span className="bar__full mono dim">{s.full} KB</span>
-            </div>
-          ))}
+            ))}
           </Plate>
-          <div className="bars__aside">
+        </div>
+        <Plate
+          className="span-side size__side"
+          sheetClass="size__text"
+          bar={
+            <span className="bar__name">
+              <span className="glyphmark" aria-hidden>
+                ✓
+              </span>
+              Which file to use
+            </span>
+          }
+        >
+          <div className="pick">
+          <dl>
+            <div>
+              <dt>One roundness for the whole site</dt>
+              <dd>
+                <span>
+                  <code className="mono">inrond-round.css</code> or <code className="mono">-soft</code>
+                </span>
+                <span className="mono dim">159–163 KB</span>
+              </dd>
+            </div>
+            <div>
+              <dt>Roundness that changes: themes, hover, animation</dt>
+              <dd>
+                <span>
+                  <code className="mono">inrond.css</code>
+                </span>
+                <span className="mono dim">257 KB</span>
+              </dd>
+            </div>
+            <div>
+              <dt>Both roman and italic, adjustable</dt>
+              <dd>
+                <span>Load the italic only where it is used</span>
+                <span className="mono dim">539 KB</span>
+              </dd>
+            </div>
+          </dl>
+          </div>
+          <div className="math">
+            <p className="side__k">On a first visit</p>
             <p>
-              <strong>Honest comparison.</strong> Google Sans Flex cut to the same three axes (weight, optical size and roundness)
-              is <span className="mono">202 KB</span> of Latin; Inrond is <span className="mono">257 KB</span>. Inrond is not the
-              smaller choice; it is the Inter-compatible one.
+              Adjustable roundness adds <span className="mono">154 KB</span> over Inter: under a second on a slow phone
+              connection, a tenth of a second on broadband. Your text shows in a fallback font until it arrives, and after the
+              first visit the file is cached.
             </p>
           </div>
-        </div>
+        </Plate>
       </div>
     </section>
   );
