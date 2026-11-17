@@ -23,8 +23,8 @@ export function Size() {
         }
         text={
           <>
-            Rounding doubles the outline points, so with the axis live Inrond is 2.3 times Inter&rsquo;s Latin file. If your site
-            needs one roundness, ship Round or Soft at about 1.5 times Inter, or freeze any value with{" "}
+            Rounding doubles the outline points, so with the axis live Inrond is 2.5 times Inter&rsquo;s Latin file. If your site
+            needs one roundness, ship Round or Soft at about 1.6 times Inter, or freeze any value with{" "}
             <code className="mono">scripts/pin.py</code>.
           </>
         }
@@ -40,7 +40,7 @@ export function Size() {
                   <span>
                     <code className="mono">inrond-round.css</code> or <code className="mono">-soft</code>
                   </span>
-                  <span className="mono dim">153–159 KB</span>
+                  <span className="mono dim">159–163 KB</span>
                 </dd>
               </div>
               <div>
@@ -49,14 +49,14 @@ export function Size() {
                   <span>
                     <code className="mono">inrond.css</code>, axis live
                   </span>
-                  <span className="mono dim">236 KB</span>
+                  <span className="mono dim">257 KB</span>
                 </dd>
               </div>
               <div>
                 <dt>Roman and italic, both live</dt>
                 <dd>
                   <span>Freeze one, or load the italic lazily</span>
-                  <span className="mono dim">502 KB</span>
+                  <span className="mono dim">539 KB</span>
                 </dd>
               </div>
             </dl>
@@ -64,8 +64,8 @@ export function Size() {
           <div className="math">
             <p className="side__k">What that means for a first visit</p>
             <p>
-              <span className="mono">+133 KB</span> of Latin font over Inter with the axis live. At the 1.6 Mbit/s Lighthouse uses
-              for slow 4G that is about <span className="mono">0.65 s</span>; at 10 Mbit/s about <span className="mono">0.1 s</span>.
+              <span className="mono">+154 KB</span> of Latin font over Inter with the axis live. At the 1.6 Mbit/s Lighthouse uses
+              for slow 4G that is about <span className="mono">0.77 s</span>; at 10 Mbit/s about <span className="mono">0.1 s</span>.
               Text shows in the fallback until it arrives (<span className="mono">font-display: swap</span>), and the file is cached
               after.
             </p>
@@ -102,7 +102,7 @@ export function Size() {
           <div className="bars__aside">
             <p>
               <strong>Honest comparison.</strong> Google Sans Flex cut to the same three axes (weight, optical size and roundness)
-              is <span className="mono">202 KB</span> of Latin; Inrond is <span className="mono">236 KB</span>. Inrond is not the
+              is <span className="mono">202 KB</span> of Latin; Inrond is <span className="mono">257 KB</span>. Inrond is not the
               smaller choice; it is the Inter-compatible one.
             </p>
           </div>

@@ -32,23 +32,23 @@ export const COMPARE: { head: string[]; rows: Row[] } = {
     ["Weight", "100 to 900", "100 to 900", "1 to 1000", "4 static", "100 to 900"],
     ["Optical size", "14 to 32", "14 to 32", "1 to 144", "No", "14 to 32"],
     ["OpenType features", "39", "39", "20", "6", "33"],
-    ["Full roman, woff2", "843 KB", "344 KB", "1,418 KB", "151 KB a weight", "170 KB"],
+    ["Full roman, woff2", "899 KB", "344 KB", "1,418 KB", "151 KB a weight", "170 KB"],
   ],
 };
 
 export const SIZES = [
   { build: "Inter 4.1", note: "the baseline", latin: 103, full: 344, kind: "base" },
-  { build: "Inrond Round", note: "frozen at 100", latin: 153, full: 527, kind: "frozen" },
-  { build: "Inrond Soft", note: "frozen at 50", latin: 159, full: 555, kind: "frozen" },
-  { build: "Inrond", note: "axis live", latin: 236, full: 843, kind: "live" },
-  { build: "Inrond Italic", note: "axis live", latin: 266, full: 945, kind: "live" },
+  { build: "Inrond Round", note: "frozen at 100", latin: 159, full: 540, kind: "frozen" },
+  { build: "Inrond Soft", note: "frozen at 50", latin: 163, full: 563, kind: "frozen" },
+  { build: "Inrond", note: "axis live", latin: 257, full: 899, kind: "live" },
+  { build: "Inrond Italic", note: "axis live", latin: 282, full: 995, kind: "live" },
 ] as const;
 
 export const CHECKS = [
   { name: "Sharp", rule: "ROND 0 renders the same as Inter", limit: "any 4-unit difference", roman: "0 px", italic: "0 px" },
-  { name: "Inside", rule: "Rounding only removes ink", limit: "8+ units outside Inter", roman: "0 glyphs", italic: "0 glyphs" },
+  { name: "Inside", rule: "Round ends pass their cut no further than Inter’s o passes the baseline", limit: "8+ units beyond that", roman: "0 glyphs", italic: "0 glyphs" },
   { name: "Monotone", rule: "More roundness never brings ink back", limit: "10+ units return", roman: "0 glyphs", italic: "0 glyphs" },
-  { name: "Kinks", rule: "New 8° direction breaks at ROND 100", limit: "over 2% of glyphs", roman: "20 of 58", italic: "9 of 57" },
+  { name: "Kinks", rule: "New 8° direction breaks at ROND 100", limit: "over 2% of glyphs", roman: "13 of 58", italic: "18 of 57" },
   { name: "Metrics", rule: "Advance widths that differ from Inter", limit: "any mismatch", roman: "0", italic: "0" },
   { name: "Shaping", rule: "HarfBuzz runs that differ from Inter", limit: "any differing run", roman: "0 of 504", italic: "0 of 504" },
 ] as const;

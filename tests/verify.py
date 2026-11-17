@@ -1,13 +1,16 @@
 """Geometry and layout checks of the built font against its source.
 
-    python tests/verify.py SOURCE.ttf BUILT.ttf [--quick]
+    python tests/verify.py SOURCE.ttf BUILT.ttf [--quick] [--inside]
 
 Glyphs are rasterised with FreeType at 1024 px per em (1 px = 2 font units at
 2048 upm) and compared as bitmaps, i.e. the way a renderer sees them.
 
 1. sharp      at ROND 0 every glyph matches the source
-2. inside     rounding only removes ink, it never adds any
-3. monotone   more roundness never brings back a visible amount of ink
+2. inside     a round stroke end passes its cut the way an o passes the
+              baseline; rounding adds no ink beyond that overshoot
+              (--inside: the 1.0 rule, no ink outside the source at all)
+3. monotone   inside the source outline, more roundness never brings back a
+              visible amount of ink
 4. kinks      rounding introduces no small direction breaks
 5. metrics    advance widths are identical at every roundness
 6. shaping    HarfBuzz produces the same glyphs and positions
@@ -167,7 +170,23 @@ lost = []
 bands = {r: [0, 0] for r in ROUNDS}         # [3-8 deg, 8-20 deg] gained over the source
 src_bands = [0, 0]
 kink_fail = {}
+def source_overshoot(L):
+    from fontTools.pens.boundsPen import BoundsPen
+    gs = src.getGlyphSet(location=L)
+    for name in ("o", "O", "zero"):
+        if name in gs:
+            pen = BoundsPen(gs)
+            gs[name].draw(pen)
+            return max(0.0, -pen.bounds[1])
+    return 0.0
+
+
+OVER = {}
+OVERSHOOT = "--inside" not in sys.argv     # --inside: the 1.0 rule, no ink outside the source at all
 for L in LOCS:
+    ov = source_overshoot(L) if OVERSHOOT else 0.0
+    n_fail = int(math.ceil((ov + 8) / 2))       # px; 1 px = 2 units
+    OVER[str(L)] = ov
     r0.at(L)
     for r, face in r1.items():
         face.at(dict(L, ROND=r))
@@ -192,9 +211,9 @@ for L in LOCS:
                 notes["drift"][n] = max(notes["drift"].get(n, 0), add)
                 if add > worst["added"][0]:
                     worst["added"] = (add, "%s ROND %d %s" % (n, r, L))
-                if thick(added, 4):
-                    failures.append("ink added: %s ROND %d at %s" % (n, r, L))
-            returned = cur & ~prev
+                if thick(added, n_fail):
+                    failures.append("ink added beyond the limit: %s ROND %d at %s" % (n, r, L))
+            returned = (cur & ~prev & b) if OVERSHOOT else (cur & ~prev)
             back = thick(returned, 3)
             if back:
                 notes["back"][n] = max(notes["back"].get(n, 0), back)
@@ -223,7 +242,8 @@ for L in LOCS:
 
 lost.sort()
 print("1 sharp     difference to the source at ROND 0:   worst %d px %s" % worst["sharp"])
-print("2 inside    glyphs drifting 4+ units outside:      %d of %d (worst %d px, %s)" % (
+print("2 inside    allowed outside the source per location: %s units" % " ".join("%.0f" % (v + 8) for v in OVER.values()))
+print("            glyphs with ink 4+ units outside:      %d of %d (worst %d px, %s)" % (
     len(notes["drift"]), len(names), worst["added"][0], worst["added"][1]))
 print("3 monotone  glyphs regaining 6+ units of ink:      %d of %d (worst %d px, %s)" % (
     len(notes["back"]), len(names), worst["back"][0], worst["back"][1]))

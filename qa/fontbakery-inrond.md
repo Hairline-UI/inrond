@@ -257,7 +257,7 @@ dotbelow (U+0323)</p>
 
 
 
-* ⚠️ **WARN** <p>Font file is 2.2Mb; ideally it should be less than 1.0Mb</p>
+* ⚠️ **WARN** <p>Font file is 2.3Mb; ideally it should be less than 1.0Mb</p>
  [code: large-font]
 
 
@@ -290,15 +290,17 @@ dotbelow (U+0323)</p>
 
 
 * ⚠️ **WARN** <p>Interpolation issues were found in the font:</p>
-<pre><code>- Contour 0 point 14 in glyph 'lambda' has a kink between location opsz=32,wght=400,ROND=0 and location opsz=14,wght=100,ROND=0
+<pre><code>- Contour 1 point 14 in glyph 'lambdabar' has a kink between location opsz=32,wght=400,ROND=0 and location opsz=14,wght=100,ROND=0
 
-- Contour 0 point 50 in glyph 'lambda' has a kink between location opsz=32,wght=400,ROND=0 and location opsz=14,wght=100,ROND=0
+- Contour 1 point 50 in glyph 'lambdabar' has a kink between location opsz=32,wght=400,ROND=0 and location opsz=14,wght=100,ROND=0
+
+- Contour 1 in glyph '.notdef': becomes underweight between opsz=14,wght=400,ROND=100 and opsz=32,wght=400,ROND=0.
 
 - Contour 1 in glyph '.notdef': becomes underweight between opsz=14,wght=900,ROND=100 and opsz=32,wght=100,ROND=0.
 
-- Contour 1 point 14 in glyph 'lambdabar' has a kink between location opsz=32,wght=400,ROND=0 and location opsz=14,wght=100,ROND=0
+- Contour 0 point 14 in glyph 'lambda' has a kink between location opsz=32,wght=400,ROND=0 and location opsz=14,wght=100,ROND=0
 
-- Contour 1 point 50 in glyph 'lambdabar' has a kink between location opsz=32,wght=400,ROND=0 and location opsz=14,wght=100,ROND=0
+- Contour 0 point 50 in glyph 'lambda' has a kink between location opsz=32,wght=400,ROND=0 and location opsz=14,wght=100,ROND=0
 </code></pre>
  [code: interpolation-issues]
 
@@ -351,7 +353,7 @@ dotbelow (U+0323)</p>
 
 * .notdef: B&lt;&lt;768.0,256.0&gt;-&lt;768.0,256.0&gt;-&lt;768.0,256.0&gt;&gt; has the same coordinates as a previous segment.
 
-* 22987 more.
+* 22768 more.
 </code></pre>
 <p>Use -F or --full-lists to disable shortening of long lists.</p>
  [code: overlapping-path-segments]

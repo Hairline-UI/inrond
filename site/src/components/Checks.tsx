@@ -74,8 +74,8 @@ export function Checks() {
           <div className="report__end">
             <p className="report__ok">All checks passed, roman and italic.</p>
             <p className="dim">
-              Below the limits, reported and not hidden: 399 roman glyphs leave Inter&rsquo;s outline by 4 to 7 units somewhere;
-              the median glyph loses 2.5% of its ink at ROND 100. FontBakery&rsquo;s universal profile: 3 fails, all inherited from
+              Below the limits, reported and not hidden: round stroke ends pass Inter&rsquo;s outline by up to 24 units, as far as
+              Inter&rsquo;s own o passes the baseline; the median glyph loses 1.0% of its ink at ROND 100. FontBakery&rsquo;s universal profile: 3 fails, all inherited from
               Inter and kept on purpose, against Inter&rsquo;s 6.{" "}
               <a href={`${REPO}/tree/main/qa`}>Read the reports</a>
             </p>

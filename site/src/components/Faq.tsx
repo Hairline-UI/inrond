@@ -9,7 +9,7 @@ const QA: [string, string][] = [
   ],
   [
     "It’s more than twice the size of Inter.",
-    "With the axis live, yes: 236 KB of Latin against 103. If you need one roundness, the frozen Round and Soft builds are about 1.5 times Inter, and scripts/pin.py freezes any other value.",
+    "With the axis live, yes: 257 KB of Latin against 103. If you need one roundness, the frozen Round and Soft builds are about 1.6 times Inter, and scripts/pin.py freezes any other value.",
   ],
   [
     "Was it drawn or tuned by hand?",

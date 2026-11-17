@@ -147,7 +147,7 @@ Start ... running 127 individual check executions.
                                                                                
     More info: https://github.com/fonttools/fontbakery/issues/3320
 
-    WARN Font file is 2.2Mb; ideally it should be less than 1.0Mb [code:       
+    WARN Font file is 2.3Mb; ideally it should be less than 1.0Mb [code:       
          large-font]                                                           
 
     Result: WARN
@@ -172,22 +172,26 @@ Start ... running 127 individual check executions.
     WARN Interpolation issues were found in the font:                          
                                                                                
                                                                                
-          - Contour 0 point 14 in glyph 'lambda' has a kink between location   
-          opsz=32,wght=400,ROND=0 and location opsz=14,wght=100,ROND=0         
-                                                                               
-          - Contour 0 point 50 in glyph 'lambda' has a kink between location   
-          opsz=32,wght=400,ROND=0 and location opsz=14,wght=100,ROND=0         
-                                                                               
-          - Contour 1 in glyph '.notdef': becomes underweight between          
-          opsz=14,wght=900,ROND=100 and opsz=32,wght=100,ROND=0.               
-                                                                               
           - Contour 1 point 14 in glyph 'lambdabar' has a kink between         
           location opsz=32,wght=400,ROND=0 and location                        
           opsz=14,wght=100,ROND=0                                              
                                                                                
           - Contour 1 point 50 in glyph 'lambdabar' has a kink between         
           location opsz=32,wght=400,ROND=0 and location                        
-          opsz=14,wght=100,ROND=0 [code: interpolation-issues]                 
+          opsz=14,wght=100,ROND=0                                              
+                                                                               
+          - Contour 1 in glyph '.notdef': becomes underweight between          
+          opsz=14,wght=400,ROND=100 and opsz=32,wght=400,ROND=0.               
+                                                                               
+          - Contour 1 in glyph '.notdef': becomes underweight between          
+          opsz=14,wght=900,ROND=100 and opsz=32,wght=100,ROND=0.               
+                                                                               
+          - Contour 0 point 14 in glyph 'lambda' has a kink between location   
+          opsz=32,wght=400,ROND=0 and location opsz=14,wght=100,ROND=0         
+                                                                               
+          - Contour 0 point 50 in glyph 'lambda' has a kink between location   
+          opsz=32,wght=400,ROND=0 and location opsz=14,wght=100,ROND=0         
+          [code: interpolation-issues]                                         
                                                                                
 
     Result: WARN
@@ -241,7 +245,7 @@ https://github.com/google/fonts/issues/7594#issuecomment-2401909084
           * .notdef: B<<768.0,256.0>-<768.0,256.0>-<768.0,256.0>> has the      
           same coordinates as a previous segment.                              
                                                                                
-          * 22987 more.                                                        
+          * 22768 more.                                                        
                                                                                
                                                                                
          Use -F or --full-lists to disable shortening of long lists. [code:    

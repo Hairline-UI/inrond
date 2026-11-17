@@ -257,7 +257,7 @@ dotbelow (U+0323)</p>
 
 
 
-* ⚠️ **WARN** <p>Font file is 2.3Mb; ideally it should be less than 1.0Mb</p>
+* ⚠️ **WARN** <p>Font file is 2.4Mb; ideally it should be less than 1.0Mb</p>
  [code: large-font]
 
 
@@ -290,27 +290,27 @@ dotbelow (U+0323)</p>
 
 
 * ⚠️ **WARN** <p>Interpolation issues were found in the font:</p>
-<pre><code>- Contour 1 in glyph 'uni1DCA': becomes underweight between opsz=14,wght=400,ROND=100 and opsz=32,wght=400,ROND=0.
-
-- Contour 1 in glyph 'uni1DCA': becomes underweight between opsz=14,wght=900,ROND=100 and opsz=32,wght=100,ROND=0.
-
-- Contour 0 point 67 in glyph 'uni0293' has a kink between location opsz=14,wght=900,ROND=100 and location opsz=32,wght=100,ROND=0
+<pre><code>- Contour 0 point 67 in glyph 'uni0293' has a kink between location opsz=14,wght=900,ROND=100 and location opsz=32,wght=100,ROND=0
 
 - Contour 0 point 20 in glyph 'uni0286' has a kink between location opsz=14,wght=100,ROND=0 and location opsz=14,wght=900,ROND=0
 
 - Contour 0 point 20 in glyph 'uni0286' has a kink between location opsz=32,wght=100,ROND=0 and location opsz=32,wght=900,ROND=0
 
-- Contour 0 point 20 in glyph 'uni0286' has a kink between location opsz=32,wght=900,ROND=0 and location opsz=32,wght=100,ROND=25
-
 - Contour 0 point 20 in glyph 'uni0286' has a kink between location opsz=32,wght=900,ROND=25 and location opsz=32,wght=100,ROND=50
 
-- Contour 0 point 20 in glyph 'uni0286' has a kink between location opsz=32,wght=900,ROND=50 and location opsz=32,wght=100,ROND=75
+- Contour 1 point 6 in glyph 'uni0240' has a kink between location opsz=32,wght=100,ROND=0 and location opsz=32,wght=900,ROND=0
 
-- Contour 1 point 13 in glyph 'uni024F' has a kink between location opsz=32,wght=400,ROND=0 and location opsz=14,wght=100,ROND=0
+- Contour 1 point 6 in glyph 'uni0240' has a kink between location opsz=32,wght=900,ROND=0 and location opsz=32,wght=100,ROND=25
 
-- Contour 0 point 3 in glyph 'Trthook' has a kink between location opsz=32,wght=900,ROND=75 and location opsz=32,wght=100,ROND=100
+- Contour 1 point 6 in glyph 'uni0240' has a kink between location opsz=32,wght=900,ROND=25 and location opsz=32,wght=100,ROND=50
 
-- 12 more.
+- Contour 1 point 6 in glyph 'uni0240' has a kink between location opsz=32,wght=900,ROND=50 and location opsz=32,wght=100,ROND=75
+
+- Contour 1 point 6 in glyph 'uni0240' has a kink between location opsz=32,wght=900,ROND=75 and location opsz=32,wght=100,ROND=100
+
+- Contour 0 point 13 in glyph 'yturn' has a kink between location opsz=32,wght=400,ROND=0 and location opsz=14,wght=100,ROND=0
+
+- 6 more.
 </code></pre>
 <p>Use -F or --full-lists to disable shortening of long lists.</p>
  [code: interpolation-issues]
@@ -364,7 +364,7 @@ dotbelow (U+0323)</p>
 
 * .notdef: B&lt;&lt;718.0,256.0&gt;-&lt;718.0,256.0&gt;-&lt;718.0,256.0&gt;&gt; has the same coordinates as a previous segment.
 
-* 22509 more.
+* 22370 more.
 </code></pre>
 <p>Use -F or --full-lists to disable shortening of long lists.</p>
  [code: overlapping-path-segments]

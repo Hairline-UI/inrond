@@ -176,7 +176,7 @@ Start ... running 127 individual check executions.
                                                                                
     More info: https://github.com/fonttools/fontbakery/issues/3320
 
-    WARN Font file is 2.3Mb; ideally it should be less than 1.0Mb [code:       
+    WARN Font file is 2.4Mb; ideally it should be less than 1.0Mb [code:       
          large-font]                                                           
 
     Result: WARN
@@ -201,12 +201,6 @@ Start ... running 127 individual check executions.
     WARN Interpolation issues were found in the font:                          
                                                                                
                                                                                
-          - Contour 1 in glyph 'uni1DCA': becomes underweight between          
-          opsz=14,wght=400,ROND=100 and opsz=32,wght=400,ROND=0.               
-                                                                               
-          - Contour 1 in glyph 'uni1DCA': becomes underweight between          
-          opsz=14,wght=900,ROND=100 and opsz=32,wght=100,ROND=0.               
-                                                                               
           - Contour 0 point 67 in glyph 'uni0293' has a kink between           
           location opsz=14,wght=900,ROND=100 and location                      
           opsz=32,wght=100,ROND=0                                              
@@ -220,25 +214,28 @@ Start ... running 127 individual check executions.
           opsz=32,wght=900,ROND=0                                              
                                                                                
           - Contour 0 point 20 in glyph 'uni0286' has a kink between           
-          location opsz=32,wght=900,ROND=0 and location                        
-          opsz=32,wght=100,ROND=25                                             
-                                                                               
-          - Contour 0 point 20 in glyph 'uni0286' has a kink between           
           location opsz=32,wght=900,ROND=25 and location                       
           opsz=32,wght=100,ROND=50                                             
                                                                                
-          - Contour 0 point 20 in glyph 'uni0286' has a kink between           
-          location opsz=32,wght=900,ROND=50 and location                       
-          opsz=32,wght=100,ROND=75                                             
+          - Contour 1 point 6 in glyph 'uni0240' has a kink between location   
+          opsz=32,wght=100,ROND=0 and location opsz=32,wght=900,ROND=0         
                                                                                
-          - Contour 1 point 13 in glyph 'uni024F' has a kink between           
-          location opsz=32,wght=400,ROND=0 and location                        
-          opsz=14,wght=100,ROND=0                                              
+          - Contour 1 point 6 in glyph 'uni0240' has a kink between location   
+          opsz=32,wght=900,ROND=0 and location opsz=32,wght=100,ROND=25        
                                                                                
-          - Contour 0 point 3 in glyph 'Trthook' has a kink between location   
+          - Contour 1 point 6 in glyph 'uni0240' has a kink between location   
+          opsz=32,wght=900,ROND=25 and location opsz=32,wght=100,ROND=50       
+                                                                               
+          - Contour 1 point 6 in glyph 'uni0240' has a kink between location   
+          opsz=32,wght=900,ROND=50 and location opsz=32,wght=100,ROND=75       
+                                                                               
+          - Contour 1 point 6 in glyph 'uni0240' has a kink between location   
           opsz=32,wght=900,ROND=75 and location opsz=32,wght=100,ROND=100      
                                                                                
-          - 12 more.                                                           
+          - Contour 0 point 13 in glyph 'yturn' has a kink between location    
+          opsz=32,wght=400,ROND=0 and location opsz=14,wght=100,ROND=0         
+                                                                               
+          - 6 more.                                                            
                                                                                
                                                                                
          Use -F or --full-lists to disable shortening of long lists. [code:    
@@ -295,7 +292,7 @@ https://github.com/google/fonts/issues/7594#issuecomment-2401909084
           * .notdef: B<<718.0,256.0>-<718.0,256.0>-<718.0,256.0>> has the      
           same coordinates as a previous segment.                              
                                                                                
-          * 22509 more.                                                        
+          * 22370 more.                                                        
                                                                                
                                                                                
          Use -F or --full-lists to disable shortening of long lists. [code:    

@@ -11,7 +11,7 @@ Rounded takes on Inter already exist (Open Runde, Intern), but each is a separat
 - **Drop-in for Inter.** Advance widths and kerning are identical to Inter at every roundness, so switching, theming or animating never reflows text.
 - **Any roundness, not one.** Pick a value, animate it, or bind it to the radius token your buttons and cards use.
 - **All of Inter.** Cyrillic, Greek, Vietnamese, 39 features, optical sizes and a real italic, all rounded by the same rule.
-- **Pay only for what you use.** If you want one roundness, ship a frozen build at about 1.5 times the size of Inter instead of the full axis.
+- **Pay only for what you use.** If you want one roundness, ship a frozen build at about 1.6 times the size of Inter instead of the full axis.
 
 ![Roundness steps](documentation/inrond-ramp.png)
 
@@ -120,7 +120,7 @@ Read from the released font files with fontTools on 14 November 2026 (`tools/ben
 | Weight | 100 to 900 axis | 100 to 900 axis | 100 to 900 axis | 100 to 900 axis | 4 static | 1 to 1000 axis |
 | Optical size | 14 to 32 axis | 14 to 32 axis | 14 to 32 axis | No | No | 1 to 144 axis |
 | OpenType features | 39 | 39 | 33 | 26 | 6 | 20 |
-| Full roman, woff2 | 843 KB | 344 KB | 170 KB | 87 KB | 151 KB per weight | 1,418 KB |
+| Full roman, woff2 | 899 KB | 344 KB | 170 KB | 87 KB | 151 KB per weight | 1,418 KB |
 
 ### What it costs
 
@@ -129,25 +129,25 @@ The price of the axis is file size. Same subsetter settings for every row, woff2
 | Build | Latin subset | Full font |
 | --- | --- | --- |
 | Inter 4.1 | 103 KB | 344 KB |
-| Inrond, roundness axis live | 236 KB | 843 KB |
-| Inrond Soft, frozen at ROND 50 | 159 KB | 555 KB |
-| Inrond Round, frozen at ROND 100 | 153 KB | 527 KB |
+| Inrond, roundness axis live | 257 KB | 899 KB |
+| Inrond Soft, frozen at ROND 50 | 163 KB | 563 KB |
+| Inrond Round, frozen at ROND 100 | 159 KB | 540 KB |
 
-So a page set in Latin downloads 133 KB more than with Inter if it wants the live axis, and about 50 KB more if it freezes one roundness. Rounding roughly doubles the number of outline points, which is why even a frozen build is larger than Inter.
+So a page set in Latin downloads 154 KB more than with Inter if it wants the live axis, and about 60 KB more if it freezes one roundness. Rounding roughly doubles the number of outline points, which is why even a frozen build is larger than Inter.
 
-Google Sans Flex stores its roundness axis more compactly: cut down to weight and roundness only, its Latin subset is 70 KB against 144 KB for Inrond with the same two axes. Inrond's case is not size; it is Inter compatibility, coverage and the italic.
+Google Sans Flex stores its roundness axis more compactly: cut down to weight and roundness only, its Latin subset is 70 KB against 155 KB for Inrond with the same two axes. Inrond's case is not size; it is Inter compatibility, coverage and the italic.
 
 ## How it is made
 
 Inrond is generated, not redrawn. `scripts/roundlib.py` reads every master of the source and rounds it by one rule, the path a round pen would leave:
 
-- A stroke end gets the circle inscribed between its two sides, so it becomes a true round cap.
-- An outer corner gets a radius of half the local stroke width.
+- A stroke end gets the circle that touches its two sides and its cut, so it becomes a true round cap. The cap passes the cut slightly, by no more than Inter's own o passes the baseline, so a rounded stem does not look shorter than a round letter.
+- An outer corner gets a radius of about half the local stroke width.
 - Joins, crotches and counters stay crisp.
 
 The sharp and the round outline of each glyph share one point structure. In the sharp outline every fillet collapses onto its corner; in the round one the same points open into an arc. That is what makes the axis possible. Three things keep it clean between the masters:
 
-1. Where a cap lands on a curve, the join is placed midway between its two handles in every master, so it stays smooth at every weight and roundness in between.
+1. Where a cap lands on a curve, the join sits where the circle touches the stroke, at the same share between its two handles in every master, so it stays smooth at every weight and roundness in between.
 2. Exact outlines at half roundness and at a mid weight are stored as sparse corrections, because a cap's end travels along a curved stroke and plain interpolation would cut that path short.
 3. Parts that join other parts (ogonek, cedilla, Cyrillic tails) keep the joining end sharp, and letters that are joined in only a few accented forms get those forms rounded as outlines of their own.
 
@@ -161,15 +161,15 @@ Layout tables, metrics, kerning and anchors are copied from the source untouched
 | --- | --- | --- |
 | Glyphs compared | 2,915 | 2,879 |
 | 1. Sharp: largest difference to Inter at ROND 0 | 0 px | 0 px |
-| 2. Inside: glyphs whose rounded outline leaves Inter's by 8 units or more | 0 | 0 |
-| 3. Monotone: glyphs where 10 units of ink or more come back as roundness grows | 0 | 0 |
-| 4. Kinks: glyphs that gain a direction break of 8 degrees or more at ROND 100 | 20 (limit 58) | 9 (limit 57) |
+| 2. Inside: glyphs with ink more than 8 units beyond the overshoot of a round end (Inter's own o overshoot, 20 to 24 units) | 0 | 0 |
+| 3. Monotone: glyphs where 10 units of ink or more come back, inside Inter's outline, as roundness grows | 0 | 0 |
+| 4. Kinks: glyphs that gain a direction break of 8 degrees or more at ROND 100 | 13 (limit 58) | 18 (limit 57) |
 | 5. Metrics: advance widths that differ from Inter | 0 | 0 |
 | 6. Shaping: HarfBuzz runs that differ from Inter | 0 of 504 | 0 of 504 |
 
-Both fonts pass every check. Units are font units of a 2048 em, so 8 units is 0.4% of the type size. Deviations under the limits are counted and listed in the reports: 399 roman and 368 italic glyphs leave Inter's outline by 4 to 7 units at some location, and the fonts gain small direction breaks of 3 to 8 degrees where a growing cap meets a curved stroke.
+Both fonts pass every check. Units are font units of a 2048 em, so 8 units is 0.4% of the type size. Deviations under the limits are counted and listed in the reports: round stroke ends pass Inter's outline by up to 24 units, and the fonts gain small direction breaks of 3 to 8 degrees where a growing cap meets a curved stroke.
 
-The frozen builds were compared with the main fonts at the same roundness: no glyph differs by 4 units or more.
+Two frozen builds were compared with the main fonts at the same roundness at four locations: no glyph of Inrond Round differs by 4 units or more, and 2 of the 2,901 glyphs of Inrond Soft Italic do.
 
 FontBakery, universal profile (`qa/fontbakery-*.md`):
 
@@ -186,9 +186,9 @@ Inrond's three failures are Inter's own and are left alone on purpose: Windows a
 
 ## Known limits
 
-- **File size.** The full roman is about two and a half times Inter (843 KB against 344 KB as woff2). Use the subsets on the web, and a frozen build if you need one roundness.
+- **File size.** The full roman is about two and a half times Inter (899 KB against 344 KB as woff2). Use the subsets on the web, and a frozen build if you need one roundness.
 - **Generated, not hand-drawn.** One rule rounds all 2,937 glyphs. It is consistent and measurable, but nobody has tuned individual letters by eye the way a type designer would.
-- **Small direction breaks.** Where a cap meets a curved stroke, the join can show a break of a few degrees. The fillet is a few units across at that point; it is not visible at reading or display sizes.
+- **Small direction breaks.** Where a cap meets a curved stroke, the join can show a break of a few degrees. They are largest at weights between the drawn ones (around 700 to 850) and can be seen there at large sizes.
 - **Three italic glyphs are rounded less.** The small capital G (ɢ), its hooked form (ʛ) and the cruzeiro sign (₢) get 75% of the normal rounding in the italic, because at Black weight the full amount turned a short arm into a spike.
 - **Only tested on Inter.** The generator is written for any TrueType variable font, but Inter is the only one it has been run and verified on.
 - **Hinting.** Like Inter's variable fonts, Inrond is unhinted.

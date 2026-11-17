@@ -15,6 +15,7 @@ How the outlines are stored
               base and dropped where they are zero, so they cost little.
 """
 import argparse
+import json
 import sys
 import time
 from array import array
@@ -131,6 +132,16 @@ def reference_stems(src):
             out.append(area / max(edges))       # perpendicular width, also when slanted
         return out, name
     raise SystemExit("no reference stem glyph found")
+
+
+def round_overshoot(src):
+    """Per location: how far the font's round letters pass the baseline (the bottom
+    of o). A round stroke end may pass its cut by no more than this."""
+    for name in ("o", "O", "zero"):
+        if name in src.glyf.keys() and not src.glyf[name].isComposite():
+            masters, _, _ = src.contours(name)
+            return [max(0.0, -min(p[1] for c in m for p in c)) for m in masters], name
+    return None, None
 
 
 # --------------------------------------------------------------------------- composites
@@ -383,7 +394,8 @@ def add_axis_to_store(store):
 
 
 # --------------------------------------------------------------------------- main
-def build(src_path, out_path, italic=False, only=None, factor=1.0, stops=(0.25, 0.5, 0.75, 1.0), mid=0.5, log=print):
+def build(src_path, out_path, italic=False, only=None, factor=1.0, stops=(0.25, 0.5, 0.75, 1.0), mid=0.5, log=print,
+          caps=True, overshoot=True):
     t0 = time.time()
     font = TTFont(src_path)
     src = Source(font, mid)
@@ -395,6 +407,10 @@ def build(src_path, out_path, italic=False, only=None, factor=1.0, stops=(0.25, 
     log("source masters: %d, plus %d mid-weight helpers" % (len(src.masters), len(src.extra)))
     log("reference stem (%s): %s" % (ref, " ".join("%.0f" % s for s in stems)))
 
+    ovs = None
+    if caps and overshoot:
+        ovs, oref = round_overshoot(src)
+        log("round overshoot (%s): %s" % (oref, " ".join("%.0f" % v for v in ovs)))
     order = font.getGlyphOrder()
     # Renderers place a glyph by its left side bearing and its bounding box
     # together; remember how the two relate in the source so it can be restored.
@@ -411,10 +427,22 @@ def build(src_path, out_path, italic=False, only=None, factor=1.0, stops=(0.25, 
     def rounder(name, parts, blocked=()):
         masters, on, phantoms = parts
         f = factor * gentle.get(name, 1.0)
-        return (GlyphRounder(masters, on, stems, upm, f, blocked=blocked, stops=stops), masters, on, phantoms)
+        return (GlyphRounder(masters, on, stems, upm, f, blocked=blocked, stops=stops,
+                             caps=caps, overshoot=ovs, helpers=len(src.extra)), masters, on, phantoms)
 
     rounders = {name: rounder(name, src.contours(name)) for name in simple}
-    blocked, decompose = find_joins(src, rounders, composite, log)
+    # Quick partial builds (--only) skip the composites, so they cannot find the
+    # joins themselves: they take them from the last full build of the same source.
+    cache = Path(__file__).parent / (".joins-italic.json" if italic else ".joins.json")
+    if only and cache.exists():
+        saved = json.loads(cache.read_text())
+        blocked = {bn: {tuple(q) for q in keys} for bn, keys in saved["blocked"].items() if bn in rounders}
+        decompose = [n for n in saved["decompose"] if n in only]
+    else:
+        blocked, decompose = find_joins(src, rounders, composite, log)
+        if not only:
+            cache.write_text(json.dumps({"blocked": {bn: sorted(keys) for bn, keys in blocked.items()},
+                                         "decompose": decompose}))
     for bn, keys in blocked.items():
         rounders[bn] = rounder(bn, rounders[bn][1:], keys)
     for name in decompose:
@@ -488,6 +516,9 @@ if __name__ == "__main__":
     ap.add_argument("--factor", type=float, default=1.0)
     ap.add_argument("--stops", default="0.25,0.5,0.75,1", help="roundness stops solved exactly, as shares of full roundness")
     ap.add_argument("--mid", type=float, default=0.5, help="normalised weight of the helper master, 0 for none")
+    ap.add_argument("--caps", default="on", choices=["on", "off"], help="off: the 1.0 stroke ends")
+    ap.add_argument("--overshoot", default="on", choices=["on", "off"], help="round ends pass their cut like the font's o passes the baseline")
     a = ap.parse_args()
     build(a.src, a.out, a.italic, set(a.only.split(",")) if a.only else None, a.factor,
-          tuple(float(x) for x in a.stops.split(",")), a.mid)
+          tuple(float(x) for x in a.stops.split(",")), a.mid,
+          caps=a.caps == "on", overshoot=a.overshoot == "on")

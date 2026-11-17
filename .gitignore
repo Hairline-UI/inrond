@@ -15,3 +15,4 @@ site/next-env.d.ts
 *.tsbuildinfo
 .hairline/
 site/DESIGN.md
+scripts/.joins*.json
