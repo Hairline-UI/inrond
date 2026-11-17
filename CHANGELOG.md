@@ -10,4 +10,4 @@ Rounder stroke ends. Same version, same file names, same metrics: replace the fi
 - **Nothing moves.** Advance widths, kerning and shaping are still identical to Inter at every roundness, and ROND 0 is still Inter.
 - **Files are 7 to 9% larger.** The full roman is 899 KB as woff2 (was 843), its Latin subset 257 KB (was 236).
 
-If you load Inrond from jsDelivr at `@v1.0`, the CDN may serve the earlier files for a while.
+If you load Inrond from jsDelivr, use the link in the README, which ends in `@5e6b991`. jsDelivr keeps the files it had already served under `@v1.0`, so that link mixes the earlier Latin files with the new ones.

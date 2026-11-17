@@ -20,7 +20,7 @@ Rounded takes on Inter already exist (Open Runde, Intern), but each is a separat
 ### From a CDN
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Hairline-UI/inrond@v1.0/fonts/webfonts/inrond.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Hairline-UI/inrond@5e6b991/fonts/webfonts/inrond.css">
 <!-- frozen builds: inrond-round.css (ROND 100, family "Inrond Round"), inrond-soft.css (ROND 50, family "Inrond Soft") -->
 ```
 

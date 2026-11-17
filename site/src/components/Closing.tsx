@@ -34,7 +34,7 @@ export function Closing() {
           </div>
           <div className="cdn">
             <span className="cdn__k mono">$</span>
-            <code className="mono">cdn.jsdelivr.net/gh/Hairline-UI/inrond@v1.0</code>
+            <code className="mono">cdn.jsdelivr.net/gh/Hairline-UI/inrond@5e6b991</code>
             <CopyButton text={`<link rel="stylesheet" href="${CDN}/inrond.css">`} label="Copy the stylesheet link tag" track="cdn-link" />
           </div>
         </div>
